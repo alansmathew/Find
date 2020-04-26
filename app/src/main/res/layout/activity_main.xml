@@ -3,16 +3,51 @@
     android:orientation="vertical"
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android" >
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get GPS Location"
-        android:id="@+id/getloc">
-    </Button>
     <EditText
+        android:layout_marginTop="5dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:hint="Username"
+        android:background="@drawable/border"
+        android:id="@+id/username">
+    </EditText>
+    <EditText
+        android:layout_marginTop="5dp"
+        android:hint="Password"
+        android:textAlignment="center"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:background="@drawable/border"
+        android:id="@+id/password">
+    </EditText>
+    <Button
+        android:layout_marginTop="5dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/login"
+        android:text="Login">
+    </Button>
+    <TextView
+        android:textColor="#2c86f5"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/location">
-    </EditText>
+        android:id="@+id/register"
+        android:text="New user ? Register now">
+    </TextView>
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Get GPS Location"-->
+<!--        android:id="@+id/getloc">-->
+<!--    </Button>-->
+<!--    <EditText-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/location">-->
+<!--    </EditText>-->
 </LinearLayout>

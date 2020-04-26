@@ -22,8 +22,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button getloc;
-    EditText viewloc;
+    Button getloc,login;
+    EditText viewloc,username,password;
+    TextView register;
     LocationManager locationManager;
     LocationListener locationListener;
 
@@ -32,31 +33,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getloc = (Button) findViewById(R.id.getloc);
-        viewloc = (EditText) findViewById(R.id.location);
+        login=(Button)findViewById(R.id.login);
+        username=(EditText) findViewById(R.id.username);
+        password=(EditText)findViewById(R.id.password);
+        register=(TextView)findViewById(R.id.register);
 
 
-        getloc.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            @Override
-            public void onClick(View view) {
-                viewloc.setText("hello world");
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.INTERNET
-                    }, 10);
-                    return;
-                }
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                String latitude = Double.toString(location.getLatitude());
-                String longitude = Double.toString(location.getLongitude());
-                viewloc.setText(latitude+","+longitude);
+//        getloc = (Button) findViewById(R.id.getloc);
+//        viewloc = (EditText) findViewById(R.id.location);
+
+
+//        getloc.setOnClickListener(new View.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            @Override
+//            public void onClick(View view) {
+//                viewloc.setText("Some unknown error 001");
+//                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//                if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(MainActivity.this,new String[]{
+//                            Manifest.permission.ACCESS_FINE_LOCATION,
+//                            Manifest.permission.ACCESS_COARSE_LOCATION,
+//                            Manifest.permission.INTERNET
+//                    }, 10);
+//                    return;
+//                }
+//                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//                String latitude = Double.toString(location.getLatitude());
+//                String longitude = Double.toString(location.getLongitude());
+//                viewloc.setText(latitude+","+longitude);
 //                Toast.makeText(MainActivity.this,"hello", Toast.LENGTH_LONG).show();
-
-            }
-        });
+//            }
+//        });
  }
 }

@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-
                     private void Submit(String data)
                     {
                         final String savedata = data;

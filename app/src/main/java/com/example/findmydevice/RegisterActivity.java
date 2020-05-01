@@ -16,6 +16,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,35 +56,38 @@ public class RegisterActivity extends Activity {
         reg_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String reg_user=reg_username.getText().toString();
-                String reg_pass=reg_password.getText().toString();
-                String reg_confirm_pass=reg_confirm_password.getText().toString();
-
-                if(reg_user != " " && reg_pass != " " && reg_confirm_pass != " ")
-                {
-//                    if(reg_password.getText().toString() == reg_confirm_password.getText().toString()) {
-                        try
+                Boolean flag=true;
+                if(reg_username.getText().toString().isEmpty()){
+                    flag=false;
+                    reg_username.setBackground(getResources().getDrawable(R.drawable.warning));
+                }
+                if(reg_password.getText().toString().isEmpty()){
+                    flag=false;
+                    reg_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                }
+                if( reg_confirm_password.getText().toString().isEmpty()){
+                    flag=false;
+                    reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                }
+                if(!reg_password.getText().toString().equals(reg_confirm_password.getText().toString())) {
+                    flag=false;
+                    reg_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                    reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                }
+                if(flag==true){
+                    try
                         {
                             JSONObject jsonParam = new JSONObject();
                             jsonParam.put("username", reg_username.getText().toString());
                             jsonParam.put("password", reg_password.getText().toString());
                             jsonParam.put("fun", "reg");
                             String data= jsonParam.toString();
-//                            viewloc.setText(data);
                             Submit(data);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-//                    }
-//                    else{
-//                        Toast.makeText(RegisterActivity.this,"Password dosnt match",Toast.LENGTH_LONG).show();
-//                    }
+                    }
                 }
-                else{
-                    Toast.makeText(RegisterActivity.this,"Fill up all fields",Toast.LENGTH_LONG).show();
-                }
-
-            }
 
             private void Submit(String data)
             {
@@ -94,7 +99,6 @@ public class RegisterActivity extends Activity {
                     public void onResponse(String response) {
                         try {
                             JSONObject objres = new JSONObject(response);
-                            Toast.makeText(RegisterActivity.this,objres.toString(),Toast.LENGTH_LONG).show();
 //                            viewloc.setText(objres.toString());
 //                                  Toast.makeText(getApplicationContext(),objres.toString(),Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
@@ -127,12 +131,36 @@ public class RegisterActivity extends Activity {
 
                 requestQueue.add(stringRequest);
             }
+
+
         });
-
-//        public void setWarning(){
-//            reg_username.setHint("Username taken");
-//        }
-
+        reg_username.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    reg_username.setBackground(getResources().getDrawable(R.drawable.border));
+                }
+                return false;
+            }
+        });
+        reg_password.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    reg_password.setBackground(getResources().getDrawable(R.drawable.border));
+                }
+                return false;
+            }
+        });
+        reg_confirm_password.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.border));
+                }
+                return false;
+            }
+        });
         reg_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

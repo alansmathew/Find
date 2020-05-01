@@ -4,6 +4,7 @@
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <EditText
+        android:clickable="true"
         android:layout_marginTop="5dp"
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -13,6 +14,7 @@
         android:id="@+id/reg_username">
     </EditText>
     <EditText
+        android:clickable="true"
         android:layout_marginTop="5dp"
         android:hint="Password"
         android:textAlignment="center"
@@ -23,6 +25,7 @@
         android:id="@+id/reg_password">
     </EditText>
     <EditText
+        android:clickable="true"
         android:layout_marginTop="5dp"
         android:hint="Confirm Password"
         android:textAlignment="center"

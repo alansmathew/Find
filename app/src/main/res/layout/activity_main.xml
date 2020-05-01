@@ -43,12 +43,12 @@
         android:clickable="true"
         android:text="New user ? Register now">
     </TextView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get GPS Location"
-        android:id="@+id/getloc">
-    </Button>
+<!--    <Button-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Get GPS Location"-->
+<!--        android:id="@+id/getloc">-->
+<!--    </Button>-->
     <EditText
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"

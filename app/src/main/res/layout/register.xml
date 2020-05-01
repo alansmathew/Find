@@ -10,8 +10,7 @@
         android:textAlignment="center"
         android:hint="Username"
         android:background="@drawable/border"
-        android:id="@+id/username"
-        android:layout_gravity="center_horizontal">
+        android:id="@+id/reg_username">
     </EditText>
     <EditText
         android:layout_marginTop="5dp"
@@ -21,38 +20,36 @@
         android:layout_height="50dp"
         android:inputType="textPassword"
         android:background="@drawable/border"
-        android:id="@+id/password"
-        android:layout_gravity="center_horizontal">
+        android:id="@+id/reg_password">
+    </EditText>
+    <EditText
+        android:layout_marginTop="5dp"
+        android:hint="Confirm Password"
+        android:textAlignment="center"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:background="@drawable/border"
+        android:id="@+id/reg_confirm_password">
     </EditText>
     <Button
         android:layout_marginTop="5dp"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/submit"
-        android:id="@+id/login"
+        android:id="@+id/reg_register"
         android:textStyle="bold"
         android:textColor="#ffff"
-        android:text="Login">
+        android:shadowColor="#000"
+        android:text="Register">
     </Button>
     <TextView
         android:textColor="#2c86f5"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/register"
+        android:id="@+id/reg_signin"
         android:clickable="true"
-        android:text="New user ? Register now">
+        android:text="Already a user ? Login now">
     </TextView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get GPS Location"
-        android:id="@+id/getloc">
-    </Button>
-    <EditText
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/location">
-    </EditText>
 </LinearLayout>

@@ -39,6 +39,7 @@ public class RegisterActivity extends Activity {
     TextView reg_signin;
     EditText reg_username,reg_password,reg_confirm_password;
     Button reg_register;
+    boolean username_flag=true;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,25 +57,26 @@ public class RegisterActivity extends Activity {
         reg_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Boolean flag=true;
-                if(reg_username.getText().toString().isEmpty()){
-                    flag=false;
-                    reg_username.setBackground(getResources().getDrawable(R.drawable.warning));
-                }
-                if(reg_password.getText().toString().isEmpty()){
-                    flag=false;
-                    reg_password.setBackground(getResources().getDrawable(R.drawable.warning));
-                }
-                if( reg_confirm_password.getText().toString().isEmpty()){
-                    flag=false;
-                    reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.warning));
-                }
-                if(!reg_password.getText().toString().equals(reg_confirm_password.getText().toString())) {
-                    flag=false;
-                    reg_password.setBackground(getResources().getDrawable(R.drawable.warning));
-                    reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.warning));
-                }
-                if(flag==true){
+                boolean flag=true;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    if(reg_username.getText().toString().isEmpty()){
+                        flag=false;
+                        reg_username.setBackground(getResources().getDrawable(R.drawable.warning));
+                    }
+                    if(reg_password.getText().toString().isEmpty()){
+                        flag=false;
+                        reg_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                    }
+                    if(reg_confirm_password.getText().toString().isEmpty()){
+                        flag=false;
+                        reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                    }
+                    if(!reg_password.getText().toString().equals(reg_confirm_password.getText().toString())) {
+                        flag=false;
+                        reg_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                        reg_confirm_password.setBackground(getResources().getDrawable(R.drawable.warning));
+                    }
+                if(flag==true && username_flag==true){
                     try
                         {
                             JSONObject jsonParam = new JSONObject();
@@ -88,6 +90,76 @@ public class RegisterActivity extends Activity {
                         }
                     }
                 }
+            }
+            private void Submit(String data)
+            {
+                final String savedata = data;
+                String url = "https://3gksn22kik.execute-api.me-south-1.amazonaws.com/production/findmydevice";
+                RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject objres = new JSONObject(response);
+                            int statusCode= Integer.parseInt(objres.get("statusCode").toString());
+                            if(statusCode==200){
+                                Intent intent = new Intent(RegisterActivity.this,ShowMap.class);
+                                startActivity(intent);
+                            }
+//                            Toast.makeText(getApplicationContext(), objres.get("Message").toString(), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
+                            Toast.makeText(getApplicationContext(), ex.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                ) {
+                    @Override
+                    public String getBodyContentType() {
+                        return "application/json; charset=utf-8";
+                    }
+
+                    @Override
+                    public byte[] getBody() throws AuthFailureError {
+                        try {
+                            return savedata == null ? null : savedata.getBytes("utf-8");
+                        } catch (UnsupportedEncodingException uee) {
+                            //Log.v("Unsupported Encoding while trying to get the bytes", data);
+                            return null;
+                        }
+                    }
+                };
+
+                requestQueue.add(stringRequest);
+            }
+
+        });
+
+//        ---------------- username on focus change checks ----------------------
+
+        reg_username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b) {
+                    if (!reg_username.getText().toString().isEmpty()) {
+                        try {
+                            JSONObject jsonParam = new JSONObject();
+                            jsonParam.put("username", reg_username.getText().toString());
+                            jsonParam.put("fun", "username_check");
+                            String data = jsonParam.toString();
+                            Submit(data);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
 
             private void Submit(String data)
             {
@@ -99,6 +171,19 @@ public class RegisterActivity extends Activity {
                     public void onResponse(String response) {
                         try {
                             JSONObject objres = new JSONObject(response);
+
+                            int statusCode= Integer.parseInt(objres.get("statusCode").toString());
+//                            if(statusCode==200){
+////                                Toast.makeText(getApplicationContext(),objres.get("Message").toString(),Toast.LENGTH_LONG).show();
+//                            }
+                            if(statusCode!=200){
+                                username_flag=false;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                                    reg_username.setBackground(getResources().getDrawable(R.drawable.warning));
+                                }
+                                Toast.makeText(getApplicationContext(),objres.get("Message").toString(),Toast.LENGTH_LONG).show();
+                            }
+                            else username_flag=true;
 //                            viewloc.setText(objres.toString());
 //                                  Toast.makeText(getApplicationContext(),objres.toString(),Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
@@ -131,9 +216,12 @@ public class RegisterActivity extends Activity {
 
                 requestQueue.add(stringRequest);
             }
-
-
         });
+
+
+//------------------------------------------------------------------------------------
+
+
         reg_username.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

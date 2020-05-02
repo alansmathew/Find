@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         register=(TextView)findViewById(R.id.register);
 
         //        getloc = (Button) findViewById(R.id.getloc);
-        viewloc = (EditText) findViewById(R.id.location);
+//        viewloc = (EditText) findViewById(R.id.location);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     jsonParam.put("fun", "usAu");
 
                     String data= jsonParam.toString();
-                    viewloc.setText(data);
+//                    viewloc.setText(data);
                     Submit(data);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -96,7 +96,14 @@ public class MainActivity extends AppCompatActivity {
                             public void onResponse(String response) {
                                 try {
                                     JSONObject objres = new JSONObject(response);
-                                    viewloc.setText(objres.toString());
+                                    if(Integer.parseInt(objres.get("statusCode").toString())==200){
+                                        Intent intent = new Intent(MainActivity.this,ShowMap.class);
+                                        startActivity(intent);
+                                    }
+                                    else{
+                                        username.setBackground(getResources().getDrawable(R.drawable.warning));
+                                        password.setBackground(getResources().getDrawable(R.drawable.warning));
+                                    }
 //                                  Toast.makeText(getApplicationContext(),objres.toString(),Toast.LENGTH_LONG).show();
                                 } catch (JSONException e) {
                                     Toast.makeText(getApplicationContext(), "Server Error", Toast.LENGTH_LONG).show();
@@ -130,8 +137,25 @@ public class MainActivity extends AppCompatActivity {
                     }
         });
 
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    username.setBackground(getResources().getDrawable(R.drawable.border));
+                    password.setBackground(getResources().getDrawable(R.drawable.border));
+                }
+            }
+        });
 
-
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    username.setBackground(getResources().getDrawable(R.drawable.border));
+                    password.setBackground(getResources().getDrawable(R.drawable.border));
+                }
+            }
+        });
 
 
 

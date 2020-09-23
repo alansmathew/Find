@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #stuff{
+            background-color: #F0F0F0;
+            border: 1px solid black;
+            border-radius:4px;
+            height: 200px;
+            width:200px;
+            position: fixed;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            padding:2px;
+            transition: 1s ease-out;
+            transform-style: preserve-3d;
+            z-index: 1;
+        }
+        #stuff:hover{
+            transform: translate(-50%, -50%) rotateY(180deg);
+        }
+        .stuff2{
+            background-color: white;
+            transform-style: preserve-3d;
+            border: 1px solid blue;
+            margin:10px;
+            border-radius: 3px;
+            position:absolute;
+            top:0;
+            left:50%;
+            /* transform: translateY(-50%); */
+            padding:10px;
+        }
+        #le2{
+            transform: translateZ(50px) translateX(-50%);
+            z-index: 2
+        }
+        #le1{
+            transform: translateZ(-50px) translateX(-50%) rotateY(180deg);
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="stuff" style="z-index: 2;">
+        <div class="stuff2" id="le2" >
+            <h3>OLAMIGO</h3>
+        </div>
+        <div class="stuff2" id="le1">
+            <h3>PODAMIGO</h3>
+        </div>
+    </div>
+</body>
+</html>

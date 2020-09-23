@@ -1,0 +1,58 @@
+body{
+    background:aqua;
+    margin:0px;
+    padding: 0px;
+}
+.login{
+    background-color: white;
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+#back_of_input{
+    background-color:white;
+    border: 1px solid black;
+    border-radius:4px;
+    height:50px;
+    width:220px;
+    position: relative;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    padding:2px;
+    transition: 0.6s ease-in;
+    transform-style: preserve-3d;
+    z-index: 1;
+}
+/* #back_of_input:hover{
+    transform: translate(-50%, -50%) rotateY(180deg);
+} */
+.inputs{
+    background-color: rgba(0, 0, 0, 0);
+    transform-style: preserve-3d;
+    border-color: rgba(0, 0, 0, 0);
+    margin-top:10px;
+    border-radius: 3px;
+    position:absolute;
+    top:0;
+    left:50%;
+    padding:10px;
+    width:200px;
+    height:30px;
+    font-size: 13px;
+}
+.inputs:focus{
+    outline: none;
+}
+
+#view1{
+    transform: translateZ(50px) translateX(-50%);
+    z-index: 2
+}
+#view2{
+    transform: translateZ(-50px) translateX(-50%) rotateY(180deg);
+    z-index: 0;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+</head>
+<style>
+    .cont{
+        background-color: aqua;
+        width:400px;
+        height:500px;
+        position: fixed;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+    }
+    .img{
+        /* 3:4 */
+        background-image: url(logo.png);
+        background-size: 120px 160px;
+        position: relative;
+        width:120px;
+        height: 160px;
+        top:50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        perspective-origin: left;
+        transition: .9s ease-in-out;
+    }
+    .eye{
+        position: relative;
+        top:-30px;
+        display: flex;
+        width:35px;
+        height:35px;
+        background: rgba(145, 141, 141, 0.289);
+        margin: 0 7px;
+        border-radius: 50%;
+    }
+    .ball{
+        width: 5px;
+        height: 5px;
+        background: #000;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        border: 4px solid #333;
+  }
+
+</style>
+<script>
+    
+    function call(){
+        function strech(){alert("yes")}
+
+        
+    }
+
+    var balls = document.getElementsByClassName("ball");
+    document.onmousemove = function()
+    {
+        var x = event.clientX * 100 / window.innerWidth + "%";
+        var y = event.clientY * 100 / window.innerHeight + "%";
+        for(var i=0;i<2;i++)
+        {
+            balls[i].style.left = x;
+            balls[i].style.top = y;
+            balls[i].style.transform = "translate(-"+x+",-"+y+")";
+        }
+    }
+
+    function fun(){
+        // document.getElementsByClassName('img')[0].style.perspective="100px";
+        document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(15deg);"
+        // alert("yes")
+
+    }
+</script>
+<body onload=call()>
+    <div class="cont">
+        <!-- <img src="logo.png" alt=""> -->
+        <div class="img">
+            <div class="eye">
+                <div class="ball"></div>
+            </div>
+            <div class="eye">
+                <div class="ball"></div>
+            </div>
+        </div>
+        <button onclick="fun()">click</button>
+    </div>
+</body>
+</html>

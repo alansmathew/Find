@@ -1,0 +1,69 @@
+.face{
+    position: relative;
+    width:200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #ffcd00;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.face::before{
+    content:' ';
+    position: absolute;
+    top:123px;
+    width: 110px;
+    height: 50px;
+    background-color: #b57700 ;
+    border-bottom-left-radius: 70px ;
+    border-bottom-right-radius: 70px ;
+    transition: 0.5s;
+}
+.face:hover::before{
+    top:144px;
+    width: 90px;
+    height: 20px;
+    background-color: #b57700 ;
+    border-bottom-left-radius: 0px ;
+    border-bottom-right-radius: 0px ;
+}
+.eyes{
+    position: relative;
+    top:-30px;
+    display: flex;
+}
+.eyes .eye {
+    position: relative;
+    width:55px;
+    height:55px;
+    display: block;
+    background: white;
+    margin: 0 10px;
+    border-radius: 50%;
+
+}
+/* .eyes .eye::before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top:50%;
+    left:10px;
+    transform: translate(-50%,-50%);
+    background: black;
+    border-radius: 50%;
+} */
+
+.ball{
+    width: 25px;
+    height: 25px;
+    background: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    border: 7px solid #333;
+  }
+  

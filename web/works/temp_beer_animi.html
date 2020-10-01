@@ -57,9 +57,19 @@
 <script>
     
     function call(){
-        function strech(){alert("yes")}
-
-        
+        st=true
+        function strech(){
+            if (st){
+                document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(20deg);"
+                st=false;
+            }
+            else{
+                document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(0deg);"
+                st=true;
+            }
+            setTimeout(strech,5000);
+        }
+        strech();
     }
 
     var balls = document.getElementsByClassName("ball");
@@ -75,12 +85,6 @@
         }
     }
 
-    function fun(){
-        // document.getElementsByClassName('img')[0].style.perspective="100px";
-        document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(15deg);"
-        // alert("yes")
-
-    }
 </script>
 <body onload=call()>
     <div class="cont">

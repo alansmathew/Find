@@ -15,20 +15,50 @@ function startanimation(temp){
     }
 }
 
-var balls = document.getElementsByClassName("ball");
-document.onmousemove = function(){
-  var x = event.clientX * 100 / window.innerWidth + "%";
-  var y = event.clientY * 100 / window.innerHeight + "%";
+// var balls = document.getElementsByClassName("ball");
+// document.onmousemove = function(){
+//   var x = event.clientX * 100 / window.innerWidth + "%";
+//   var y = event.clientY * 100 / window.innerHeight + "%";
 
-  for(var i=0;i<2;i++){
-    balls[i].style.left = x;
-    balls[i].style.top = y;
-    balls[i].style.transform = "translate(-"+x+",-"+y+")";
-  }
-}
+//   for(var i=0;i<2;i++){
+//     balls[i].style.left = x;
+//     balls[i].style.top = y;
+//     balls[i].style.transform = "translate(-"+x+",-"+y+")";
+//   }
+// }
 
 // beer animation 
 // document.querySelector('body').addEventListener('mousemove',eyeball);
 // function eyeball(){
 
 // }
+ 
+// location animi 
+function call(){
+  st=true
+  function strech(){
+      if (st){
+          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(20deg);"
+          st=false;
+      }
+      else{
+          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(0deg);"
+          st=true;
+      }
+      setTimeout(strech,5000);
+  }
+  strech();
+}
+
+var balls = document.getElementsByClassName("ball");
+document.onmousemove = function()
+{
+  var x = event.clientX * 100 / window.innerWidth + "%";
+  var y = event.clientY * 100 / window.innerHeight + "%";
+  for(var i=0;i<2;i++)
+  {
+      balls[i].style.left = x;
+      balls[i].style.top = y;
+      balls[i].style.transform = "translate(-"+x+",-"+y+")";
+  }
+}

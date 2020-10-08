@@ -68,7 +68,6 @@
    */
    .img{
     /* 3:4 */
-    background-color: #000;
     background-image: url(works/logo.png);
     background-size: 120px 160px;
     position: relative;
@@ -76,7 +75,7 @@
     height: 160px;
     top:50%;
     left:50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%,-10%);
     display:flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +87,7 @@
     position: absolute;
     top:86px;
     width: 50px;
-    height: 10px;
+    height: 5px;
     border: solid black 2px ;
     /* background-color: #030303 ; */
     border-bottom-left-radius: 50% ;
@@ -100,7 +99,7 @@
     position: absolute;
     top:86px;
     width: 40px;
-    height: 10px;
+    height: 5px;
     border: solid black 2px ;
     /* background-color: #030303 ; */
     border-radius: 3px;

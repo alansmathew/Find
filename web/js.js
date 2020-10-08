@@ -38,11 +38,11 @@ function call(){
   st=true
   function strech(){
       if (st){
-          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(20deg);"
+          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-10%) rotateY(20deg);"
           st=false;
       }
       else{
-          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-50%) rotateY(0deg);"
+          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-10%) rotateY(0deg);"
           st=true;
       }
       setTimeout(strech,5000);
@@ -61,4 +61,13 @@ document.onmousemove = function()
       balls[i].style.top = y;
       balls[i].style.transform = "translate(-"+x+",-"+y+")";
   }
+}
+
+function eye_move(){
+    value=document.getElementById("view1").value.length + 1;
+    // var x = event.clientX * 100 / window.innerWidth ;
+    // var y = event.clientY * 100 / window.innerHeight ;
+    // alert(x,y)
+    poss= document.getElementById("view1")
+    document.getElementById("val").innerHTML= poss.clientX;
 }

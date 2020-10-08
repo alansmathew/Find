@@ -8,7 +8,7 @@
     <script src="js.js"></script>
 </head>
 <body onload="call()">
-    <div class="login">
+    <div class="login" id="one">
         <div class="bucket">
             <!-- bear animations -->
 
@@ -22,20 +22,26 @@
                     </div>
                 </div>
             </div> -->
-
-            <div class="img">
-                <div class="eye">
-                    <div class="ball"></div>
+            <div class="image_div">
+                <div class="hands">
+                    <img src="hands_left.png" alt="" id="lefthand">
+                    <img src="hands_right.png" alt="" id="righthand">
                 </div>
-                <div class="eye">
-                    <div class="ball"></div>
+                <div class="img">
+                    <div class="eye">
+                        <div class="ball"></div>
+                    </div>
+                    <div class="eye">
+                        <div class="ball"></div>
+                    </div>
                 </div>
             </div>
+            
             
             <!-- login box animation  -->
             <div id="back_of_input" style="z-index:2;">
                 <input id=view1 class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" >
-                <input id=view2 class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2')" >
+                <input id=view2 class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2')" onclick="eyes()">
             </div>
 
             <br><center>

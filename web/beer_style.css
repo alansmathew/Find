@@ -82,6 +82,29 @@
     perspective-origin: left;
     transition: .9s ease-in-out;
 }
+.image_div{
+    position: relative;
+}
+.image_div .hands{
+    position: absolute;
+    z-index: 1;
+    float: left;
+    transition: 0.6s ease-in;
+    transform-style: preserve-3d;
+}
+#lefthand{
+    transform: translateZ(-50px) translateX(-50%) rotateY(-180deg);
+    z-index: 0;
+}
+
+.hands img{
+    position: relative;
+    width:80px;
+    height:130px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-66%,0%);
+}
 .img::before{
     content:' ';
     position: absolute;
@@ -89,6 +112,7 @@
     width: 50px;
     height: 5px;
     border: solid black 2px ;
+    /* background-color: #b57700 ; */
     /* background-color: #030303 ; */
     border-bottom-left-radius: 50% ;
     border-bottom-right-radius: 50% ;
@@ -101,6 +125,7 @@
     width: 40px;
     height: 5px;
     border: solid black 2px ;
+    background-color: #b57700 ;
     /* background-color: #030303 ; */
     border-radius: 3px;
     /* border-bottom-left-radius:0px ;

@@ -1,7 +1,7 @@
 var flag=true
 function startanimation(temp){
     if(flag && temp=='next'){
-        document.getElementById("back_of_input").style.transform = " rotateY(180deg)";
+        document.getElementById("back_of_input").style.transform = "rotateY(180deg)";
         document.getElementsByClassName("click_button")[1].style.width = "109px";
         document.getElementsByClassName("click_button")[0].style.display = "inline";
         document.getElementsByClassName("click_button")[0].style.width = "107px";
@@ -63,7 +63,6 @@ document.onmousemove = function()
   }
 }
 
-
 function eye_move(id){
     var input = document.getElementById(id);
     var increment = 100/30;
@@ -79,4 +78,11 @@ function eye_move(id){
           balls[i].style.transform = "translate(-"+x+",-"+y+")";
       }
     }
+}
+
+function eyes(){
+    document.getElementById("lefthand").style.transform = "rotateY(180deg)";
+    document.getElementById("lefthand").cssText="transition: 0.6s ease-in;transform-style: preserve-3d;"
+    
+    // document.getElementsByClassName('hands')[0].style.cssText="display:block"
 }

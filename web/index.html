@@ -34,15 +34,14 @@
             
             <!-- login box animation  -->
             <div id="back_of_input" style="z-index:2;">
-                <input id=view1 class="inputs" type="text" placeholder="Username" onkeypress="eye_move()">
-                <input id=view2 class="inputs" type="Password" placeholder="Password">
+                <input id=view1 class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" >
+                <input id=view2 class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2')" >
             </div>
 
             <br><center>
                     <button class="click_button" onclick="startanimation('back')" style="display: none;">Back</button>
                     <button class="click_button" onclick="startanimation('next')">Next</button>
                 </center>
-            <p id="val"></p>
         </div>
     </div>
 </body>

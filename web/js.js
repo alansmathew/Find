@@ -63,11 +63,20 @@ document.onmousemove = function()
   }
 }
 
-function eye_move(){
-    value=document.getElementById("view1").value.length + 1;
-    // var x = event.clientX * 100 / window.innerWidth ;
-    // var y = event.clientY * 100 / window.innerHeight ;
-    // alert(x,y)
-    poss= document.getElementById("view1")
-    document.getElementById("val").innerHTML= poss.clientX;
+
+function eye_move(id){
+    var input = document.getElementById(id);
+    var increment = 100/30;
+    var total_increment = input.value.length * increment
+
+    if(total_increment <= 100){
+        var x= total_increment + "%";
+        var y= 85 +'%';
+        for(var i=0;i<2;i++)
+      {
+          balls[i].style.left = x;
+          balls[i].style.top = y;
+          balls[i].style.transform = "translate(-"+x+",-"+y+")";
+      }
+    }
 }

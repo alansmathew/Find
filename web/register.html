@@ -35,10 +35,13 @@
             position: relative;
             width: 70%;
             height:50%;
+            line-height: 50px;
+            color: rgba(17, 17, 17, 0.733);
             /* background-color: beige; */
         }
 
         .typewriter input{
+            color:rgb(0, 0, 0);
             font-family: sign-bold;
             font-size: 27px;
             overflow: hidden;
@@ -47,7 +50,7 @@
             outline: none;
             background-color: rgba(255, 255, 255, 0);
             animation:bg_color 1s ease-in-out;
-            width:20ch;
+            width:25ch;
             transition: width 2s;
         }
 
@@ -55,7 +58,7 @@
             from { width: 0;
                    border-bottom: solid 2px rgb(67, 77, 216); 
             }
-            to { width: 20ch;
+            to { width: 25ch;
                  border-bottom: solid 2px rgb(68, 77, 202);  
             }
         }
@@ -70,8 +73,8 @@
         var speed = 45;
         function typeWriter() {
             if (i < txt.length) {
-                // document.getElementsByClassName('typewriter')[0].innerHTML += txt.charAt(i);
-                document.getElementsByClassName('typewriter')[0].innerHTML += txt.charAt(i);
+                var data= document.createTextNode(txt.charAt(i));
+                document.getElementsByClassName('typewriter')[0].appendChild(data);
                 i++;
                 setTimeout(typeWriter, speed);
             }
@@ -80,26 +83,44 @@
                 x.setAttribute("type", "text");
                 x.setAttribute("id", "name");
                 x.setAttribute("onkeypress", "check_enter(event,'name','false')");
-                x.setAttribute("onfocusout", "check_enter(event,'name','true')");
+                x.setAttribute("onblur", "check_enter(event,'name','true')");
                 x.setAttribute("onclick", "change_color('name')");
                 document.getElementsByClassName('typewriter')[0].appendChild(x);
             }
             else if(p==1){
-            
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "text");
+                x.setAttribute("id", "email");
+                x.setAttribute("onkeypress", "check_enter(event,'email','false')");
+                x.setAttribute("onblur", "check_enter(event,'email','true')");
+                x.setAttribute("onclick", "change_color('email')");
+                document.getElementsByClassName('typewriter')[0].appendChild(x);
+            }
+            else if(p==2){
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "password");
+                x.setAttribute("id", "password");
+                x.setAttribute("onkeypress", "check_enter(event,'password','false')");
+                x.setAttribute("onblur", "check_enter(event,'password','true')");
+                x.setAttribute("onclick", "change_color('password')");
+                document.getElementsByClassName('typewriter')[0].appendChild(x);
             }
         }
 
         function check_enter(event,id,flag) {
             if (event.keyCode == 13 || flag=='true'){
                 field=document.getElementById(id)
-                if (validate(id)){
-                    var len = field.value.length;
+                var len = field.value.length;
+                if(validate(id)){
                     field.style.cssText="transition: width 1s;width:"+len+"ch;border-bottom: solid 2px rgba(42, 42, 42, 0.467);";
                     typeWriter();
                 }
-                else{
+                else if (validate(id)==false){
                     field.style.cssText="border-bottom: solid 2px rgb(236, 70, 70);";
-                } 
+                }
+                else{
+                    field.style.cssText="transition: width 1s;width:"+len+"ch;border-bottom: solid 2px rgba(42, 42, 42, 0.467);";
+                }
             }    
         }
 
@@ -108,8 +129,30 @@
                 patt=/^[a-zA-Z\. ]+$/;
                 var value = document.getElementById(id).value ;
                 if(value.trim()=="" || !value.match(patt)){ return false }
-                else{
-                    txt = txt+' and you would like to sign up with the email address';
+                else if (txt.length < 14){
+                    txt+=" and you would like to sign up with the email address ";
+                    i--;
+                    p++;
+                    return true ; 
+                }
+            }
+            if(id=='email'){
+                patt=/^([A-Za-z0-9\.]{4,30})+@[a-z.]+\.+[a-z]+$/;
+                var value = document.getElementById(id).value ;
+                if(value.trim()=="" || !value.match(patt)){ return false }
+                else if (txt.length < 68){
+                    txt+=" Create a strong password with a mix of some letter, symbol and numbers ";
+                    i--;
+                    p++;
+                    return true ; 
+                }
+            }
+            if(id=='password'){
+                patt=/^(?=.*[!@#$%^&*(),.?":{}|<>\ )(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+                var value = document.getElementById(id).value ;
+                if(value.trim()=="" || !value.match(patt)){ return false }
+                else if (txt.length < 140){
+                    txt+="Great you are all set ";
                     i--;
                     p++;
                     return true ; 

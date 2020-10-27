@@ -90,9 +90,7 @@ function eyes(){
 
     document.getElementById("lefthand").style.cssText="visibility:visible;"
     document.getElementById("righthand").style.cssText="visibility:visible;"
-    // document.getElementById("lefthand").style.transform = "rotateY(180deg)";
     document.getElementsByClassName('ball')[0].style.cssText="visibility:hidden;"
     document.getElementsByClassName('ball')[1].style.cssText="visibility:hidden;"
     
-    // document.getElementsByClassName('hands')[0].style.cssText="display:block"
 }

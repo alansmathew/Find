@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+        }
+        @font-face {
+            font-family:sign;
+            src: url(/Users/alansmathew/Desktop/Find/web/fonts/Signika.ttf);
+        }
+        @font-face {
+            font-family:sign-bold;
+            src: url(/Users/alansmathew/Desktop/Find/web/fonts/Signika-bold.ttf);
+        }
+
+        .right_container{
+            width:60%;
+            height:100vh;
+            /* background-color:rgb(172, 172, 172); */
+            float: right;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .typewriter{
+            font-family: sign;
+            font-weight: 100;
+            font-size: 27px;
+            position: relative;
+            width: 70%;
+            height:50%;
+            /* background-color: beige; */
+        }
+
+        .typewriter input{
+            font-family: sign-bold;
+            font-size: 27px;
+            overflow: hidden;
+            border: none;
+            border-bottom: solid 2px rgb(68, 77, 202);
+            outline: none;
+            background-color: rgba(255, 255, 255, 0);
+            animation:bg_color 1s ease-in-out;
+            width:20ch;
+            transition: width 2s;
+        }
+
+        @keyframes bg_color {
+            from { width: 0;
+                   border-bottom: solid 2px rgb(67, 77, 216); 
+            }
+            to { width: 20ch;
+                 border-bottom: solid 2px rgb(68, 77, 202);  
+            }
+        }
+       
+    </style>
+
+    <script>
+
+        var i = 0;
+        var p = 0; 
+        var txt = 'Your name is ';
+        var speed = 45;
+        function typeWriter() {
+            if (i < txt.length) {
+                // document.getElementsByClassName('typewriter')[0].innerHTML += txt.charAt(i);
+                document.getElementsByClassName('typewriter')[0].innerHTML += txt.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+            else if(p==0){
+                var x = document.createElement("INPUT");
+                x.setAttribute("type", "text");
+                x.setAttribute("id", "name");
+                x.setAttribute("onkeypress", "check_enter(event,'name','false')");
+                x.setAttribute("onfocusout", "check_enter(event,'name','true')");
+                x.setAttribute("onclick", "change_color('name')");
+                document.getElementsByClassName('typewriter')[0].appendChild(x);
+            }
+            else if(p==1){
+            
+            }
+        }
+
+        function check_enter(event,id,flag) {
+            if (event.keyCode == 13 || flag=='true'){
+                field=document.getElementById(id)
+                if (validate(id)){
+                    var len = field.value.length;
+                    field.style.cssText="transition: width 1s;width:"+len+"ch;border-bottom: solid 2px rgba(42, 42, 42, 0.467);";
+                    typeWriter();
+                }
+                else{
+                    field.style.cssText="border-bottom: solid 2px rgb(236, 70, 70);";
+                } 
+            }    
+        }
+
+        function validate(id){
+            if(id=='name'){
+                patt=/^[a-zA-Z\. ]+$/;
+                var value = document.getElementById(id).value ;
+                if(value.trim()=="" || !value.match(patt)){ return false }
+                else{
+                    txt = txt+' and you would like to sign up with the email address';
+                    i--;
+                    p++;
+                    return true ; 
+                }
+            }
+        }
+
+        function change_color(id){
+            document.getElementById(id).style.cssText="border-bottom: solid 2px rgba(42, 42, 42, 0.767);"
+        }
+    </script>
+
+</head>
+<body onload="typeWriter()">
+    <div class="right_container">
+        <div class="typewriter" >
+            <!-- <input type="text" name="" id="name" onkeypress="check_enter(event,'name','false')" onfocusout="check_enter(event,'name','true')" > -->
+        </div>
+    </div>
+</body>
+</html>

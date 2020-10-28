@@ -176,10 +176,7 @@
                 document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;";
                 patt=/^([a-zA-Z\. ]{2,})+$/;
                 var value = document.getElementById(id).value ;
-                if(value.trim()=="" || !value.match(patt)){ 
-                    nam=false ;
-                    return false 
-                }
+                if(value.trim()=="" || !value.match(patt)){ nam=false ; return false }
                 else if (txt.length < 14){
                     txt+=" and you would like to sign up with the email address ";
                     i--;
@@ -187,9 +184,7 @@
                     nam=true
                     return true ; 
                 }
-                else{
-                    nam=true
-                }
+                else{nam=true}
             }
             if(id=='email'){
                 document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;";
@@ -205,31 +200,22 @@
                     email=true
                     return true ; 
                 }
-                else{
-                    email=true
-                }
+                else{email=true}
             }
             if(id=='password'){
                 document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;";
                 patt=/^(?=.*[!@#$%^&*(),.?":\[\]{}|<>\ ])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
                 var value = document.getElementById(id).value ;
-                if(value.trim()=="" || !value.match(patt)){ 
-                    password=false
-                    return false 
-                }
+                if(value.trim()=="" || !value.match(patt)){ password=false; return false }
                 else if (txt.length < 140){
                     document.getElementsByClassName('typewriter')[0].appendChild(document.createElement("br"))
                     txt+="Great, you are all set.";
                     i--;
                     p++;
                     password=true
-                    // document.getElementById('create_account').style.cssText="visibility:visible;opacity:1;";
                     return true ; 
                 }
-                else{
-                    password=true;
-                    // document.getElementById('create_account').style.cssText="visibility:visible;opacity:1;";
-                }
+                else{password=true;}
             }
         }
 

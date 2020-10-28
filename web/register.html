@@ -28,18 +28,26 @@
             align-items: center;
             justify-content: center;
         }
+        .right_inside_conatiner{
+            position: relative;
+            width:70%;
+            height: auto;
+            /* background-color: blueviolet; */
+
+        }
+
         .typewriter{
             font-family: sign;
             font-weight: 100;
             font-size: 27px;
             position: relative;
-            width: 70%;
-            height:50%;
+            width: 100%;
+            height:auto;
             line-height: 50px;
             color: rgba(17, 17, 17, 0.733);
             /* background-color: beige; */
         }
-
+    
         .typewriter input{
             color:rgb(0, 0, 0);
             font-family: sign-bold;
@@ -62,15 +70,48 @@
                  border-bottom: solid 2px rgb(68, 77, 202);  
             }
         }
+        #create_account{
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.6s linear;
+            transition-delay: 1.2s;
+            outline: none;
+            cursor: pointer;
+            width:300px;
+            height:60px;
+            position: relative;
+            bottom:0px;
+            margin-top: 40px;
+            font-family: sign;
+            color:white;
+            font-size:larger;
+            background-color: rgb(62, 118, 191);
+            border-radius: 9px;
+            border:none;
+            box-shadow: 1px 5px 14px rgba(119, 127, 240, 0.426);
+        }
+        @keyframes show {
+            from {display: none;}
+            to {display: block;}
+        }
+
+        #create_account:active{
+            outline: none;
+        }
+        #create_account:hover{
+            box-shadow: none;
+        }
        
     </style>
 
     <script>
-
+        var nam=false
+        var email=false
+        var password=false
         var i = 0;
         var p = 0; 
         var txt = 'Your name is ';
-        var speed = 45;
+        var speed = 40;
         function typeWriter() {
             if (i < txt.length) {
                 var data= document.createTextNode(txt.charAt(i));
@@ -112,6 +153,9 @@
                 field=document.getElementById(id)
                 var len = field.value.length;
                 if(validate(id)){
+                    if(nam && password && email){
+                        document.getElementById('create_account').style.cssText="visibility:visible;opacity:1;";
+                    }
                     field.style.cssText="transition: width 1s;width:"+len+"ch;border-bottom: solid 2px rgba(42, 42, 42, 0.467);";
                     typeWriter();
                 }
@@ -119,6 +163,9 @@
                     field.style.cssText="border-bottom: solid 2px rgb(236, 70, 70);";
                 }
                 else{
+                    if(nam && password && email){
+                        document.getElementById('create_account').style.cssText="visibility:visible;opacity:1;";
+                    }
                     field.style.cssText="transition: width 1s;width:"+len+"ch;border-bottom: solid 2px rgba(42, 42, 42, 0.467);";
                 }
             }    
@@ -126,36 +173,62 @@
 
         function validate(id){
             if(id=='name'){
-                patt=/^[a-zA-Z\. ]+$/;
+                document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;";
+                patt=/^([a-zA-Z\. ]{2,})+$/;
                 var value = document.getElementById(id).value ;
-                if(value.trim()=="" || !value.match(patt)){ return false }
+                if(value.trim()=="" || !value.match(patt)){ 
+                    nam=false ;
+                    return false 
+                }
                 else if (txt.length < 14){
                     txt+=" and you would like to sign up with the email address ";
                     i--;
                     p++;
+                    nam=true
                     return true ; 
+                }
+                else{
+                    nam=true
                 }
             }
             if(id=='email'){
+                document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;";
                 patt=/^([A-Za-z0-9\.]{4,30})+@[a-z.]+\.+[a-z]+$/;
                 var value = document.getElementById(id).value ;
-                if(value.trim()=="" || !value.match(patt)){ return false }
+                if(value.trim()=="" || !value.match(patt)){ email=false ;return false }
                 else if (txt.length < 68){
-                    txt+=" Create a strong password with a mix of some letter, symbol and numbers ";
+                    document.getElementsByClassName('typewriter')[0].appendChild(document.createElement("br"));
+                    document.getElementsByClassName('typewriter')[0].appendChild(document.createElement("br"));
+                    txt+="Create a strong password with a mix of some letter, symbol and numbers ";
                     i--;
                     p++;
+                    email=true
                     return true ; 
+                }
+                else{
+                    email=true
                 }
             }
             if(id=='password'){
-                patt=/^(?=.*[!@#$%^&*(),.?":{}|<>\ )(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+                document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;";
+                patt=/^(?=.*[!@#$%^&*(),.?":\[\]{}|<>\ ])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
                 var value = document.getElementById(id).value ;
-                if(value.trim()=="" || !value.match(patt)){ return false }
+                if(value.trim()=="" || !value.match(patt)){ 
+                    password=false
+                    return false 
+                }
                 else if (txt.length < 140){
-                    txt+="Great you are all set ";
+                    document.getElementsByClassName('typewriter')[0].appendChild(document.createElement("br"))
+                    txt+="Great, you are all set.";
                     i--;
                     p++;
+                    password=true
+                    // document.getElementById('create_account').style.cssText="visibility:visible;opacity:1;";
                     return true ; 
+                }
+                else{
+                    password=true;
+                    // document.getElementById('create_account').style.cssText="visibility:visible;opacity:1;";
                 }
             }
         }
@@ -168,9 +241,11 @@
 </head>
 <body onload="typeWriter()">
     <div class="right_container">
-        <div class="typewriter" >
-            <!-- <input type="text" name="" id="name" onkeypress="check_enter(event,'name','false')" onfocusout="check_enter(event,'name','true')" > -->
-        </div>
+       <div class="right_inside_conatiner">
+            <div class="typewriter" >
+            </div>
+            <button id="create_account">Create account</button>
+       </div>
     </div>
 </body>
 </html>

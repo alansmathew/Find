@@ -54,7 +54,7 @@
             font-size: 27px;
             overflow: hidden;
             border: none;
-            border-bottom: solid 2px rgb(68, 77, 202);
+            border-bottom: solid 2px rgb(108,157,223);
             outline: none;
             background-color: rgba(255, 255, 255, 0);
             animation:bg_color 1s ease-in-out;
@@ -64,10 +64,10 @@
 
         @keyframes bg_color {
             from { width: 0;
-                   border-bottom: solid 2px rgb(67, 77, 216); 
+                   border-bottom: solid 2px rgb(108,157,223); 
             }
             to { width: 25ch;
-                 border-bottom: solid 2px rgb(68, 77, 202);  
+                 border-bottom: solid 2px rgb(108,157,223);  
             }
         }
         #create_account{
@@ -85,7 +85,7 @@
             font-family: sign;
             color:white;
             font-size:larger;
-            background-color: rgb(62, 118, 191);
+            background-color: rgb(66,123,199);
             border-radius: 9px;
             border:none;
             box-shadow: 1px 5px 14px rgba(119, 127, 240, 0.426);
@@ -101,6 +101,59 @@
         #create_account:hover{
             box-shadow: none;
         }
+        .left_container{
+            width:30%;
+            height: 100vh;
+            /* background-color: aqua; */
+            float: left;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .left_inside_container{
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width:90%;
+            height:95%;
+            border-radius: 20px;
+            background-image: linear-gradient(45deg, rgb(66, 121, 193), rgb(115,162,224));
+        }
+        .disc{  
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width:82%;
+            height:70%;
+            /* background-color: aquamarine; */
+        }
+        .disc h1,p{
+            position: relative;
+            top: 50%;
+            left:50%;
+            margin:10px;
+            transform: translate(-50%,-50%);
+            color: white;
+            /* font-family: sign; */
+            font-family:sans-serif;
+        }
+        .disc h1{
+            font-size:50px;
+            margin-bottom: 25px;
+        }
+        .disc p {
+            font-size: 18px;
+            letter-spacing: .6px;
+            line-height: 25px;
+        }
+        /* .smallbox{
+            float:left;
+            position: relative;  
+            width:82%;
+            height:20%;
+            background-color: blue;
+        } */
        
     </style>
 
@@ -127,6 +180,7 @@
                 x.setAttribute("onblur", "check_enter(event,'name','true')");
                 x.setAttribute("onclick", "change_color('name')");
                 document.getElementsByClassName('typewriter')[0].appendChild(x);
+                document.getElementById('name').focus();
             }
             else if(p==1){
                 var x = document.createElement("INPUT");
@@ -136,6 +190,7 @@
                 x.setAttribute("onblur", "check_enter(event,'email','true')");
                 x.setAttribute("onclick", "change_color('email')");
                 document.getElementsByClassName('typewriter')[0].appendChild(x);
+                document.getElementById('email').focus();
             }
             else if(p==2){
                 var x = document.createElement("INPUT");
@@ -145,6 +200,7 @@
                 x.setAttribute("onblur", "check_enter(event,'password','true')");
                 x.setAttribute("onclick", "change_color('password')");
                 document.getElementsByClassName('typewriter')[0].appendChild(x);
+                document.getElementById('password').focus();
             }
         }
 
@@ -226,6 +282,20 @@
 
 </head>
 <body onload="typeWriter()">
+    <div class="left_container">
+        <div class="left_inside_container">
+            <div class="disc">
+                <h1><b>Sign up</b></h1>
+                <p>
+                    Get started with few clicks and enjoy all our services for 
+                    free all over the world.
+                </p>
+            </div>
+            <div class="smallbox">
+
+            </div>
+        </div>
+    </div>
     <div class="right_container">
        <div class="right_inside_conatiner">
             <div class="typewriter" >

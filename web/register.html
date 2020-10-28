@@ -6,6 +6,7 @@
     <title>register</title>
     <style>
         body{
+            background-color: rgb(245, 245, 245);
             margin: 0px;
             padding: 0px;
         }
@@ -75,6 +76,7 @@
             opacity: 0;
             transition: visibility 0s, opacity 0.6s linear;
             transition-delay: 1.2s;
+
             outline: none;
             cursor: pointer;
             width:300px;
@@ -83,12 +85,14 @@
             bottom:0px;
             margin-top: 40px;
             font-family: sign;
-            color:white;
+            color:rgb(66, 121, 193);
             font-size:larger;
-            background-color: rgb(66,123,199);
+            /* background-color: rgb(66,123,199); */
             border-radius: 9px;
             border:none;
-            box-shadow: 1px 5px 14px rgba(119, 127, 240, 0.426);
+            /* box-shadow: 1px 5px 14px rgba(119, 127, 240, 0.426); */
+            background-color: rgb(245, 245, 245);
+            box-shadow: 28px 28px 50px #0d275017,-23px -23px 40px white;
         }
         @keyframes show {
             from {display: none;}
@@ -99,7 +103,7 @@
             outline: none;
         }
         #create_account:hover{
-            box-shadow: none;
+            box-shadow: 28px 28px 50px #0d27500d,-23px -23px 40px white;
         }
         .left_container{
             width:30%;
@@ -112,20 +116,18 @@
             justify-content: center;
         }
         .left_inside_container{
-            display: flex;
-            justify-content: center;
             position: relative;
             width:90%;
             height:95%;
-            border-radius: 20px;
+            border-radius: 30px;
             background-image: linear-gradient(45deg, rgb(66, 121, 193), rgb(115,162,224));
         }
         .disc{  
-            align-items: center;
-            justify-content: center;
             position: relative;
+            margin: auto;
+            top:0px;
             width:82%;
-            height:70%;
+            height:80%;
             /* background-color: aquamarine; */
         }
         .disc h1,p{
@@ -134,26 +136,46 @@
             left:50%;
             margin:10px;
             transform: translate(-50%,-50%);
-            color: white;
             /* font-family: sign; */
             font-family:sans-serif;
         }
         .disc h1{
+            color: white;
             font-size:50px;
             margin-bottom: 25px;
         }
         .disc p {
+            color: rgba(255, 255, 255, 0.748);
             font-size: 18px;
             letter-spacing: .6px;
             line-height: 25px;
         }
-        /* .smallbox{
-            float:left;
+        .smallbox{
             position: relative;  
+            margin: auto;
             width:82%;
-            height:20%;
-            background-color: blue;
-        } */
+            height:15%;
+            background-color: rgb(94,150,224);
+            border-radius: 30px;
+        }
+        .data{
+            position: relative;
+            width:80%;
+            top: 50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+            /* background-color: antiquewhite; */
+            color: rgba(255, 255, 255, 0.906);
+            font-family:sans-serif;
+            
+        }
+        .data h2 {
+            color: white;
+            margin-top: 0px;
+        }
+        a{
+            text-decoration: none;
+        }
        
     </style>
 
@@ -284,23 +306,27 @@
 <body onload="typeWriter()">
     <div class="left_container">
         <div class="left_inside_container">
-            <div class="disc">
-                <h1><b>Sign up</b></h1>
-                <p>
-                    Get started with few clicks and enjoy all our services for 
-                    free all over the world.
-                </p>
-            </div>
-            <div class="smallbox">
-
-            </div>
+                <div class="disc">
+                    <h1><b>Sign up</b></h1>
+                    <p>
+                        Get started with few clicks and enjoy all our services for 
+                        free all over the world.
+                    </p>
+                </div>
+                <div class="smallbox">
+                    <div class="data">
+                        <p></p>Have an account ?</p>
+                        <a href=""><p><h2>Login</h2></p></a>
+                    </div>
+                </div>
+            
         </div>
     </div>
     <div class="right_container">
        <div class="right_inside_conatiner">
             <div class="typewriter" >
             </div>
-            <button id="create_account">Create account</button>
+            <button id="create_account" >Create account</button>
        </div>
     </div>
 </body>

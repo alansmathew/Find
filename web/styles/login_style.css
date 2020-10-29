@@ -1,16 +1,7 @@
-body{
-    background:aqua;
-    margin:0px;
-    padding: 0px;
-}
 .login{
-    background-color: white;
+    /* background-color: white; */
     width: 400px;
     height: 500px;
-    position: fixed;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
 }
 .bucket{
     position: relative;
@@ -23,8 +14,10 @@ body{
 
 /* login box animation */
 #back_of_input{
-    background-color:white;
-    border: 1px solid black;
+    /* background-color:white; */
+    /* border: 1px solid rgba(0, 0, 0, 0.219);  */
+    background-color: rgb(245, 245, 245);
+    box-shadow:inset 10px 10px 10px 1px #0d27500c, inset -10px -10px 10px 1px white, 28px 28px 50px 1px #0d275017, -23px -23px 40px white; 
     border-radius:4px;
     height:50px;
     width:220px;
@@ -72,15 +65,21 @@ body{
 /* login box animation ends here */
 
 .click_button{
+    cursor: pointer;
     position: relative;
     outline: none;
     width:220px;
-    height: 40px;
-    margin:0px;
-    background-color:rgba(60, 85, 226, 0.83);
+    height:45px;
+    margin-top:5px;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 10px 10px 10px 1px #0d275017,-10px -10px 10px 1px white;
     border: 0px;
     border-radius: 4px;
-    color: aliceblue;
+    color:black;
+    transition: visibility 0s, opacity 0.2s linear;
     /* transition:width 0.2s; */
+}
+.click_button:hover{
+    box-shadow: 5px 5px 10px 1px #0d275017, -5px -5px 10px 1px white; 
 }
 

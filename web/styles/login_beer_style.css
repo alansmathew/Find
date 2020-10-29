@@ -1,10 +1,10 @@
 .img{
     /* 3:4 */
     background-image: url(../images/logo.png);
-    background-size: 120px 160px;
+    background-size: 120px 170px;
     position: relative;
     width:120px;
-    height: 160px;
+    height: 170px;
     top:50%;
     left:50%;
     transform: translate(-50%,-10%);
@@ -27,10 +27,6 @@
     transform-style: preserve-3d;
 }
 
-/* #lefthand{
-    transform: translateZ(-50px) translateX(-50%) rotateY(-180deg);
-    z-index: 0;
-} */
 
 .hands img{
     visibility: hidden;
@@ -43,42 +39,13 @@
     transform: translate(-68%,5%);
     transition: 0.6s ease-in;
 }
-/* .img::before{
-    content:' ';
-    position: absolute;
-    top:100px;
-    width: 45px;
-    height: 10px;
-    background-color:  rgb(250, 6, 6) ;
-    border: solid rgb(250, 6, 6) 2px ;
-    background-color: #b57700 ; 
-    background-color: #030303 ; 
-    border-bottom-left-radius: 50% ;
-    border-bottom-right-radius: 50% ;
-    transition: 0.5s;
-}
-.img:hover::before{
-    content:' ';
-    position: absolute;
-    top:86px;
-    width: 40px;
-    height: 5px;
-    border: solid black 2px ;
-    background-color: #b57700 ;
-    background-color: #030303 ;
-    border-radius: 3px;
-    border-bottom-left-radius:0px ;
-    border-bottom-right-radius:0px; 
-    transition: 0.5s;
-} */
 
 .eye{
     position: relative;
-    top:-25px;
+    top:-30px;
     display: flex;
     width:35px;
     height:35px;
-    /* background: rgba(145, 141, 141, 0.289); */
     background: rgba(145, 141, 141, 0.11);
     margin: 0 7px;
     border-radius: 50%;

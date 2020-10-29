@@ -1,42 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/beer_style.css">
-    <script src="js/js.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+
+    <link rel="stylesheet" href="styles/login_style.css">
+    <link rel="stylesheet" href="styles/login_beer_style.css">
+    <link rel="stylesheet" href="styles/reg_style.css">
+
+    <script src="js/login_js.js"></script>
+    <script src="js/reg_js.js"></script>
+
+    <style>
+
+       
+    </style>
+
 </head>
 <body onload="call()">
-    <div class="login" id="one">
-        <div class="bucket">
-            <!-- bear animations -->
-            <div class="image_div">
-                <div class="hands">
-                    <img src="images/hands_left.png" alt="" id="lefthand">
-                    <img src="images/hands_right.png" alt="" id="righthand">
-                </div>
-                <div class="img">
-                    <div class="eye">
-                        <div class="ball"></div>
-                    </div>
-                    <div class="eye">
-                        <div class="ball"></div>
-                    </div>
-                </div>
-            </div>
-            
-        
-            <!-- login box animation  -->
-            <div id="back_of_input" style="z-index:2;">
-                <input id=view1 class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" >
-                <input id=view2 class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2'),eyes()" onclick="eyes()">
-            </div>
+    <div class="left_container">
+        <div class="left_inside_container">
+                <div class="disc">
+                    <div class="disc_content">
+                        <h1><b id='a'>Sign in</b></h1>
+                        <p id='b'>
+                            To keep connected with us, please login with your unique credentials. <br><br>
+                            If this device is not connected and you like to make it secure, register this device after Signing in.
+                    </p>
 
-            <br><center>
-                    <button class="click_button" onclick="startanimation('back')" style="display: none;">Back</button>
-                    <button class="click_button" onclick="startanimation('next')">Next</button>
-                </center>
+                    </div>
+                </div>
+                <div class="smallbox">
+                    <div class="data">
+                        <div id="c">Not yet an user ?</div><!-- # Have an account ? -->
+                        <a onclick="change_page()"><p><h2 id='d'>Sign up</h2></p></a>
+                    </div>
+                </div>
+            
         </div>
+    </div>
+
+    <div class="right_container">
+
+        <!-- Login page starts here ( have to call 'call()' onload) -->
+        <div class="right_inside_conatiner" id="login_page">
+            <div class="login">
+                <div class="bucket">
+                    <!-- bear animations -->
+                    <div class="image_div">
+                        <div class="hands">
+                            <img src="images/hands_left.png" alt="" id="lefthand">
+                            <img src="images/hands_right.png" alt="" id="righthand">
+                        </div>
+                        <div class="img">
+                            <div class="eye">
+                                <div class="ball"></div>
+                            </div>
+                            <div class="eye">
+                                <div class="ball"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- login box animation  -->
+                    <div id="back_of_input" style="z-index:2;">
+                        <input id=view1 class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" >
+                        <input id=view2 class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2'),eyes()" onclick="eyes()">
+                    </div>
+        
+                    <br><center>
+                            <button class="click_button" onclick="startanimation('back')" style="display: none;color: red;">Back</button>
+                            <button class="click_button" onclick="startanimation('next')" style="color: blue;">Next</button>
+                        </center>
+                </div>
+            </div>
+        </div>
+    <!-- login stops here  -->
+
+    <!-- registration page starts from here (have to call 'typeWriter()' method on load) -->
+       <div class="right_inside_conatiner" id="reg_page" style='visibility: hidden;opacity: 0;'>
+            <div class="typewriter" >
+            </div>
+            <button id="create_account" >Create account</button>
+        </div>
+    <!-- registration page ends here  -->
     </div>
 </body>
 </html>

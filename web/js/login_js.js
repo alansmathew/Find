@@ -5,6 +5,10 @@ function startanimation(temp){
         document.getElementsByClassName("click_button")[1].style.width = "109px";
         document.getElementsByClassName("click_button")[0].style.display = "inline";
         document.getElementsByClassName("click_button")[0].style.width = "107px";
+
+        document.getElementById("lefthand").style.cssText="visibility:visable;"
+        document.getElementById("righthand").style.cssText="visibility:visable;"
+
         flag=false
     }
     else if (flag==false && temp =='back'){
@@ -25,11 +29,11 @@ function call(){
   st=true
   function strech(){
       if (st){
-          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-10%) rotateY(20deg);"
+          document.getElementsByClassName('img')[0].style.cssText="transform: translate(-50%,-10%) rotateY(20deg);"
           st=false;
       }
       else{
-          document.getElementsByClassName('img')[0].style.cssText="transform-style: preserve-3d;transform: translate(-50%,-10%) rotateY(0deg);"
+          document.getElementsByClassName('img')[0].style.cssText="transform: translate(-50%,-10%) rotateY(0deg);"
           st=true;
       }
       setTimeout(strech,5000);

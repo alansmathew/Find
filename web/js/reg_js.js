@@ -1,6 +1,6 @@
 var nam=false;
 var email=false;
-var email_ajax=false;
+var email_ajax;
 var password=false;
 var i = -1;
 var p = -1; 

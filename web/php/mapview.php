@@ -13,6 +13,7 @@ if(isset($_SESSION['id'])){?>
         body{
             margin:0px;
             padding:0px;
+            font-family: sign;
         }
         #map{
             border:none;
@@ -74,7 +75,6 @@ if(isset($_SESSION['id'])){?>
             position: relative;
             float: left;
             margin:5px;
-            font-family: sign;
             font-size: 13px;
         }
 

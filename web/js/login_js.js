@@ -1,15 +1,30 @@
-var flag=true
+var flag=true;
+var b="nill";
+var b2="nill";
+var em=false;
+
+function rem(id){
+    if(b=="red"){
+        em=false;
+        document.getElementById(id).style.cssText="border:none"
+    }
+}
+
 function startanimation(temp){
-    if(flag && temp=='next'){
+    // if(document.getElementById('view1').value.trim()!="" &&flag && temp=='next'){
+
+    if(document.getElementById('view1').value.trim()!="" &&flag && temp=='next'){
         document.getElementById("back_of_input").style.transform = "rotateY(180deg)";
         document.getElementsByClassName("click_button")[1].style.width = "109px";
         document.getElementsByClassName("click_button")[0].style.display = "inline";
         document.getElementsByClassName("click_button")[0].style.width = "107px";
+        document.getElementsByClassName("click_button")[1].innerHTML="Login";
 
         document.getElementById("lefthand").style.cssText="visibility:visable;"
         document.getElementById("righthand").style.cssText="visibility:visable;"
 
-        flag=false
+        flag=false;
+        
     }
     else if (flag==false && temp =='back'){
         document.getElementById("back_of_input").style.transform = " rotateY(0deg)";
@@ -17,11 +32,26 @@ function startanimation(temp){
         document.getElementsByClassName("click_button")[0].style.display = "none";
         flag=true
 
-        document.getElementById("lefthand").style.cssText="visibility:hidden;"
-        document.getElementById("righthand").style.cssText="visibility:hidden;"
+        document.getElementsByClassName("click_button")[1].innerHTML="Next";
+        document.getElementById("lefthand").style.cssText="visibility:hidden;";
+        document.getElementById("righthand").style.cssText="visibility:hidden;";
 
         document.getElementsByClassName('ball')[0].style.cssText="visibility:visable;"
         document.getElementsByClassName('ball')[1].style.cssText="visibility:visable;"
+    }
+    else if(document.getElementById('view2').value.trim()==""){
+        document.getElementById('view2').style.cssText="border:solid red .5px;";
+        b2="red";
+    }
+
+    if(document.getElementById('view1').value.trim()==""){
+        document.getElementById('view1').style.cssText="border:solid red .5px;";
+        b="red";
+    }
+    if( document.getElementById('view2').value.trim()!="" && document.getElementById('view1').value.trim()!=""){
+        document.getElementById('em').value = document.getElementById('view1').value;
+        document.getElementById('pass').value = document.getElementById('view2').value;
+        document.getElementById('lo').submit();
     }
 }
 
@@ -57,7 +87,11 @@ document.onmousemove = function()
 function eye_move(id){
     var input = document.getElementById(id);
     var increment = 100/30;
-    var total_increment = input.value.length * increment
+    var total_increment = input.value.length * increment;
+
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
 
     if(total_increment <= 100){
         var x= total_increment + "%";
@@ -72,10 +106,12 @@ function eye_move(id){
 }
 
 function eyes(){
-
     document.getElementById("lefthand").style.cssText="visibility:visible;"
     document.getElementById("righthand").style.cssText="visibility:visible;"
     document.getElementsByClassName('ball')[0].style.cssText="visibility:hidden;"
     document.getElementsByClassName('ball')[1].style.cssText="visibility:hidden;"
+    if(b2=="red"){
+        document.getElementById("view2").style.cssText="border:none";
+    }
     
 }

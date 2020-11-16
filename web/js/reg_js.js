@@ -1,12 +1,11 @@
-var nam=false
-var email=false
-var password=false
+var nam=false;
+var email=false;
+var password=false;
 var i = -1;
 var p = -1; 
 var txt = 'Your name is ';
 var speed = 40;
 var page="signin";
-
 
 function typeWriter() {
     if (i < txt.length) {
@@ -19,35 +18,44 @@ function typeWriter() {
         var x = document.createElement("INPUT");
         x.setAttribute("type", "text");
         x.setAttribute("id", "name");
+        x.setAttribute("name", "name");
         x.setAttribute("onkeypress", "check_enter(event,'name','false')");
         x.setAttribute("onblur", "check_enter(event,'name','true')");
         x.setAttribute("onclick", "change_color('name')");
         document.getElementsByClassName('typewriter')[0].appendChild(x);
+        document.getElementById("name").required = true;
         document.getElementById('name').focus();
     }
     else if(p==1){
         var x = document.createElement("INPUT");
         x.setAttribute("type", "text");
         x.setAttribute("id", "email");
+        x.setAttribute("name", "email");
         x.setAttribute("onkeypress", "check_enter(event,'email','false')");
         x.setAttribute("onblur", "check_enter(event,'email','true')");
         x.setAttribute("onclick", "change_color('email')");
         document.getElementsByClassName('typewriter')[0].appendChild(x);
         document.getElementById('email').focus();
+        document.getElementById("email").required = true;
     }
     else if(p==2){
         var x = document.createElement("INPUT");
         x.setAttribute("type", "password");
+        x.setAttribute("name", "password");
         x.setAttribute("id", "password");
         x.setAttribute("onkeypress", "check_enter(event,'password','false')");
         x.setAttribute("onblur", "check_enter(event,'password','true')");
         x.setAttribute("onclick", "change_color('password')");
         document.getElementsByClassName('typewriter')[0].appendChild(x);
+        document.getElementById("password").required = true;
         document.getElementById('password').focus();
     }
 }
 
 function check_enter(event,id,flag) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
     if (event.keyCode == 13 || flag=='true'){
         field=document.getElementById(id)
         var len = field.value.length;
@@ -134,9 +142,9 @@ function change_page(){
         
         p=0;
         i=0;
-        nam=false
-        email=false
-        password=false
+        nam=false;
+        email=false;
+        password=false;
 
         txt = 'Your name is ';
         document.getElementsByClassName('typewriter')[0].innerHTML="";
@@ -160,5 +168,17 @@ function change_page(){
         document.getElementById('reg_page').style.cssText='visibility:hidden; opacity: 0;';
         page='signin';
         call();
+    }
+}
+
+function sub(){
+    if(nam && password && email){
+        document.getElementById('register').submit()
+        
+    }
+    else{
+        check_enter(event,'name','true');
+        check_enter(event,'email','true');
+        check_enter(event,'password','true');
     }
 }

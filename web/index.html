@@ -12,13 +12,9 @@
     <script src="js/login_js.js"></script>
     <script src="js/reg_js.js"></script>
 
-    <style>
-
-       
-    </style>
 
 </head>
-<body onload="call()">
+<body onload="call()" id="bod">
     <div class="left_container">
         <div class="left_inside_container">
                 <div class="disc">
@@ -64,25 +60,36 @@
                     </div>
                     
                     <!-- login box animation  -->
-                    <div id="back_of_input" style="z-index:2;">
-                        <input id=view1 class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" >
-                        <input id=view2 class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2'),eyes()" onclick="eyes()">
-                    </div>
-        
-                    <br><center>
+                    
+                        <div id="back_of_input" style="z-index:2;">
+                            <input id='view1' class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" onclick="rem(this.id)" required>
+                            <input id='view2' class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2'),eyes()" onclick="eyes()" required>
+                        </div>
+                        <br>
+                        <center>
                             <button class="click_button" onclick="startanimation('back')" style="display: none;color: red;">Back</button>
                             <button class="click_button" onclick="startanimation('next')" style="color: blue;">Next</button>
                         </center>
                 </div>
+                <!-- hidden box  -->
+                <div class="hidden" style="display:none">
+                    <form action="php/login.php" method="POST" id="lo">
+                        <input type="text" id="em" name="email">
+                        <input type="password" id="pass" name="password">
+                    </form>
+                </div>
+
             </div>
         </div>
     <!-- login stops here  -->
 
     <!-- registration page starts from here (have to call 'typeWriter()' method on load) -->
+    
        <div class="right_inside_conatiner" id="reg_page" style='visibility: hidden;opacity: 0;'>
-            <div class="typewriter" >
-            </div>
-            <button id="create_account" >Create account</button>
+            <form action="php/register_.php" method="POST" id="register">
+                <div class="typewriter" ></div>
+                <input type="button" value="Create account" id="create_account" onclick="sub()">
+            </form>
         </div>
     <!-- registration page ends here  -->
     </div>

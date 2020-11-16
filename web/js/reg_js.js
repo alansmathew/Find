@@ -1,11 +1,30 @@
 var nam=false;
 var email=false;
+var email_ajax=false;
 var password=false;
 var i = -1;
 var p = -1; 
 var txt = 'Your name is ';
 var speed = 40;
 var page="signin";
+
+function ajax() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() 
+    {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+            if(this.responseText == 'false'){
+                email_ajax=false;
+            }
+            else{
+                email_ajax=true;
+            }
+        }
+    };
+    xhttp.open("GET", "php/checkemail.php?email="+document.getElementById('email').value, true);
+    xhttp.send();
+}
 
 function typeWriter() {
     if (i < txt.length) {
@@ -97,7 +116,13 @@ function validate(id){
         document.getElementById('create_account').style.cssText="visibility:hidden;opacity:0;transition-delay: 0s;";
         patt=/^([A-Za-z0-9\.]{4,30})+@[a-z.]+\.+[a-z]+$/;
         var value = document.getElementById(id).value ;
+        ajax();
         if(value.trim()=="" || !value.match(patt)){ email=false ;return false }
+        else if(email_ajax == false){ 
+            document.getElementById('email').value="";
+            document.getElementById('email').placeholder="Email already exist";
+            email=false ;return false
+        }
         else if (txt.length < 68){
             document.getElementsByClassName('typewriter')[0].appendChild(document.createElement("br"));
             document.getElementsByClassName('typewriter')[0].appendChild(document.createElement("br"));

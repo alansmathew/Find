@@ -14,7 +14,7 @@ $sql="insert into tbl_reg (login_id,name) values($login_id,'$name')";
 if(mysqli_query($con,$sql)){
     session_start();
     $_SESSION['id']=$login_id;
-    header("Location:..\mapview.html");
+    header("Location:mapview.php");
 }else{
     echo "something went wrong";
 }

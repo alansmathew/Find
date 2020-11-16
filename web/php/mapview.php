@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['id'])){?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,7 +118,7 @@
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-    <script src='js/map.js' defer ></script>
+    <script src='../js/map.js' defer ></script>
     <script>
 
         function cls(){
@@ -130,20 +134,20 @@
 <body>
 
     <div id='map'>
-        <img class="user" onclick="popup()" src="images/user.png">
+        <img class="user" onclick="popup()" src="../images/user.png">
         <div class="bottom_bar">
             <center>
                 <div class="cent">
                     <div class="item">
-                        <div class="img"><img src="images/phone.png" width="30px" height="30px" alt=""></div>
+                        <div class="img"><img src="../images/phone.png" width="30px" height="30px" alt=""></div>
                         <div class="cont">iphone 8</div>
                     </div>
                     <div class="item">
-                        <div class="img"><img src="images/desktop.png" width="30px" height="30px" alt=""></div>
+                        <div class="img"><img src="../images/desktop.png" width="30px" height="30px" alt=""></div>
                         <div class="cont">azuse notebook</div>
                     </div>
                     <div class="item">
-                        <div class="img"><img src="images/ipad.png" width="30px" height="30px" alt=""></div>
+                        <div class="img"><img src="../images/ipad.png" width="30px" height="30px" alt=""></div>
                         <div class="cont">ipad air</div>
                     </div>
                 </div>
@@ -167,3 +171,9 @@
 
 </body>
 </html>
+
+<?php }
+else{
+    header("location:../index.html");
+}
+?>

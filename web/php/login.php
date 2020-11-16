@@ -10,10 +10,10 @@ if($result=mysqli_query($con,$sql)){
     if(mysqli_num_rows($result)==1 && password_verify($password,$row['password'])){
         session_start();
         $_SESSION['id']=$row['login_id'];
-        header("location:../home.html");
+        header("location:mapview.php");
     }
     else{
-        header("location:../index.html");
+        header("location:../index.html?err=wrong");
     }
 }
 else{

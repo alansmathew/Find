@@ -4,9 +4,10 @@ var b2="nill";
 var em=false;
 
 function rem(id){
+    document.getElementById('err').style.cssText='visibility:hidden';
     if(b=="red"){
         em=false;
-        document.getElementById(id).style.cssText="border:none"
+        document.getElementById(id).style.cssText="border:none";
     }
 }
 
@@ -27,6 +28,8 @@ function startanimation(temp){
         
     }
     else if (flag==false && temp =='back'){
+        document.getElementById('err').style.cssText='visibility:hidden';
+        
         document.getElementById("back_of_input").style.transform = " rotateY(0deg)";
         document.getElementsByClassName("click_button")[1].style.width = "220px";
         document.getElementsByClassName("click_button")[0].style.display = "none";

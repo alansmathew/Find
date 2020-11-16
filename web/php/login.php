@@ -13,7 +13,7 @@ if($result=mysqli_query($con,$sql)){
         header("location:mapview.php");
     }
     else{
-        header("location:../index.html?err=wrong");
+        header("location:../index.php?err=wrong");
     }
 }
 else{

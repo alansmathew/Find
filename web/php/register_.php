@@ -20,6 +20,6 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']))
     }
 }
 else{
-    header("Location:../index.html");
+    header("Location:../index.php");
 }
 ?>

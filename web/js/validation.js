@@ -40,7 +40,8 @@ function full_name(id){
 
 function email_id(id){
     elem=document.getElementById(id);
-    patt=/^([A-Za-z0-9\.]{4,30})+@[a-z.]+\.+[a-z]+$/;
+    patt=/^([A-Za-z0-9\.]{4,30})+@([a-z]{3,})+\.+([a-z\.])+$/;
+    // patt=/^([A-Za-z0-9\.]{4,30})+@[a-z.]+\.+[a-z]+$/;
     if(elem.value.trim()=="" || !elem.value.match(patt))
     {   
         email=false;

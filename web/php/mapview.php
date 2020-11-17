@@ -88,7 +88,7 @@ if(isset($_SESSION['id'])){
         }
         @font-face {
             font-family:sign;
-            src: url(fonts/Signika.ttf);
+            src: url(../fonts/Signika.ttf);
         }
         .item .cont,.img{
             position: relative;
@@ -244,6 +244,9 @@ if(isset($_SESSION['id'])){
     <!-- <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" /> -->
     <!-- <script src='../js/map.js' defer ></script> -->
     <script>
+        var name_val=true;
+        var email=true;
+        var passw=true;
 
         function cls(){
             document.getElementById("myModal").style.display="none";   
@@ -264,13 +267,71 @@ if(isset($_SESSION['id'])){
         }
         function check(data){
             // alert("yes");
-            if (data=='form'){
-                document.getElementById('update').setAttribute("action", "add.php");
+            if (data=='form' && name_val && email &&passw){
+                // alert("yes")
+                document.getElementById('updat').setAttribute("action", "add.php");
             }
             else if (data=='logout'){
-                document.getElementById('update').setAttribute("action", "logout.php");
+                document.getElementById('updat').setAttribute("action", "logout.php");
+            }
+            else{
+                event.preventDefault();
             }
         }
+
+        function full_name(id){
+            elem=document.getElementById(id);
+            patt=/^([a-zA-Z\. ]{3,})+$/;
+            if(elem.value.trim()=="" || !elem.value.match(patt))
+            {   
+                name_val=false;
+                elem.value="";
+                elem.placeholder="invalid name";
+                elem.style.cssText="border-bottom: 1px solid red";
+            }
+            else{
+                name_val=true;
+                elem.style.cssText="border-bottom:1px solid black ;";
+            }
+        }
+
+
+        function email_id(id){
+            elem=document.getElementById(id);
+            patt=/^([A-Za-z0-9\.]{4,30})+@([a-z]{3,})+\.+([a-z\.])+$/;
+            // patt=/^([A-Za-z0-9\.]{4,30})+@[a-z.]+\.+[a-z]+$/;
+            if(elem.value.trim()=="" || !elem.value.match(patt))
+            {   
+                email=false;
+                elem.value="";
+                elem.placeholder="invalid email";
+                elem.style.cssText="border-bottom: 1px solid red";
+            }
+            else{
+                email=true;
+                elem.style.cssText="border-bottom:1px solid black ;";
+            }
+        }
+
+
+        function pass(id){
+            elem=document.getElementById(id);
+            passone_field=elem;
+            patt=/^(?=.*[!@#$%^&*(),.?":{}|<>\ ])(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+            if(elem.value.trim()=="" || !elem.value.match(patt))
+            {   
+                passw=false;
+                elem.value="";
+                elem.placeholder="ex: !Abcdef8";
+                elem.style.cssText="border-bottom: 1px solid red";
+            }
+            else{
+                passw=true;
+                elem.style.cssText="border-bottom:1px solid black ;";
+            }
+        } 
+
+        
         // function done(){
         //     var xhttp = new XMLHttpRequest();
         //     xhttp.onreadystatechange = function() 
@@ -324,7 +385,7 @@ if(isset($_SESSION['id'])){
       <span onclick="cls()" class="close">&times;</span>
         <div class="containers">
             <div class="left">
-                <form method='POST' id="update" enctype="multipart/form-data">
+                <form method='POST' id="updat" enctype="multipart/form-data">
                         <div class="photo">
                             <div id="pro" class="img" onclick="upload()">
                                 <div class="edit">Upload an image</div>
@@ -338,9 +399,9 @@ if(isset($_SESSION['id'])){
                             </div>
                         </div>
                     <div class="frm">
-                        <input type="text" name="name" id="nam" value="<?php echo $row_reg['name']?>" placeholder="Name" onkeypress="revok(event)">
-                        <input type="text" name="email" value="<?php echo $row_login['email']?>" id="email" placeholder="eMail" onkeypress="revok(event)">
-                        <input type="password" name="password" id="" placeholder="Change Password" onkeypress="revok(event)">
+                        <input type="text" onblur="full_name(this.id)" name="name" id="nam" value="<?php echo $row_reg['name']?>" placeholder="Name" onkeypress="revok(event)">
+                        <input type="text" onblur="email_id(this.id)" name="email" value="<?php echo $row_login['email']?>" id="email" placeholder="eMail" onkeypress="revok(event)">
+                        <input type="password" onblur="pass(this.id)" name="password" id="passwrd" placeholder="Change Password" onkeypress="revok(event)">
                         <button id="update" onclick="check('form')">Update Account</button>
                         <button id="logout" onclick="check('logout')">Logout</button>
                     </div>

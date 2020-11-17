@@ -68,7 +68,7 @@
                         ?>
 
                         <div id="back_of_input" style="z-index:2;">
-                            <input id='view1' class="inputs" type="text" placeholder="Username" onkeypress="eye_move('view1')" onclick="rem(this.id)" required>
+                            <input id='view1' class="inputs" type="text" placeholder="eMail" onkeypress="eye_move('view1')" onclick="rem(this.id)" required>
                             <input id='view2' class="inputs" type="Password" placeholder="Password" onkeypress="eye_move('view2'),eyes()" onclick="eyes()" required>
                         </div>
                         <br>

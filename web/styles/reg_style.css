@@ -86,6 +86,7 @@ body{
 }
 #create_account:active{
     outline: none;
+    background-color: rgba(255, 0, 0, 0.604);
 }
 #create_account:hover{
     box-shadow: 5px 5px 10px 1px #0d275017, -5px -5px 10px 1px white; 

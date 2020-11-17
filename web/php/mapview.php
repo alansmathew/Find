@@ -263,7 +263,7 @@ if(isset($_SESSION['id'])){
             }
         }
         function check(data){
-            alert("yes");
+            // alert("yes");
             if (data=='form'){
                 document.getElementById('update').setAttribute("action", "add.php");
             }

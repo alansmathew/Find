@@ -15,6 +15,10 @@ if(isset($_SESSION['id'])){
     $result_pro=mysqli_query($con,$sql_propic);
     $row_propic=mysqli_fetch_array($result_pro);
 
+    $sql_dev="select * from tbl_device where login_id=$login_id";
+    $result_dev=mysqli_query($con,$sql_dev);
+    // $row_dev=mysqli_fetch_array($result_dev);
+
     ?>
 
 <!DOCTYPE html>
@@ -24,7 +28,7 @@ if(isset($_SESSION['id'])){
     <meta charset="UTF-8">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FIND</title>
     <style>
         body{
             margin:0px;
@@ -99,7 +103,7 @@ if(isset($_SESSION['id'])){
 
         /* here */
         .modal {
-            display: block; 
+            display: none; 
             position: fixed; 
             z-index: 2;
             left: 0;
@@ -238,11 +242,51 @@ if(isset($_SESSION['id'])){
         input:focus, button:focus{
             outline:none;
         }
+        .left .data_cont{
+            position: relative;
+            width:100%;
+            height:60px;
+            /* background-color: green; */
+            margin-top:10px;
+        }
+        .cont_left{
+            position: relative;
+            left:0;
+            float:left;
+            width:40px;
+            height:40px;
+            /* background-color: blue; */
+            top:50%;
+            transform: translate(0,-50%);
+            margin-left:10px;
+        }
+        .cont_middle{
+            position: relative;
+            left:0;
+            float:left;
+            width:auto;
+            height:auto;
+            /* background-color: blue; */
+            top:50%;
+            transform: translate(0,-50%);
+            margin-left:10px;
+        }
+        .cont_right{
+            position: relative;
+            right:0;
+            float:right;
+            width:auto;
+            height:auto;
+            /* background-color: blue; */
+            top:50%;
+            transform: translate(0,-50%);
+            margin-right:10px;
+        }
 
     </style>
-    <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script> -->
-    <!-- <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" /> -->
-    <!-- <script src='../js/map.js' defer ></script> -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <script src='../js/map.js' defer ></script>
     <script>
         var name_val=true;
         var email=true;
@@ -362,6 +406,7 @@ if(isset($_SESSION['id'])){
         <div class="bottom_bar">
             <center>
                 <div class="cent">
+
                     <div class="item">
                         <div class="img"><img src="../images/phone.png" width="30px" height="30px" alt=""></div>
                         <div class="cont">iphone 8</div>
@@ -408,7 +453,38 @@ if(isset($_SESSION['id'])){
                 </form>
             </div>
             <div class="left" >
-                
+                <?php
+                if(mysqli_num_rows($result_dev)>0){
+                    while($row_dev=mysqli_fetch_array($result_dev)){
+                        $type=$row_dev['type'];
+                        $dname=$row_dev['name'];
+                        $imei=$row_dev['imei'];
+                        $dev_id=$row_dev['device_id'];
+
+                        $img="";
+
+                        if($type=='mobile'){
+                            $img='../images/phone.png';
+                        }
+                        else if($type=='pc'){
+                            $img='../images/desktop.png';
+                        }
+                        else{
+                            $img='../images/ipad.png';
+                        }
+
+                        ?>
+                        <div class="data_cont">
+                            <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
+                            <div class="cont_middle"><?php echo $dname ?></div>
+                            <div class="cont_middle">imei :<?php echo $imei ?></div>
+                            <a href=""><div class="cont_right">delete<?php echo $dev_id ?></div></a>
+                        </div>
+
+                        <?php
+                    }
+                }
+                ?>
             </div>
         </div>
       

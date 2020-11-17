@@ -103,7 +103,7 @@ if(isset($_SESSION['id'])){
 
         /* here */
         .modal {
-            display: none; 
+            display: block;          /* here <--------------------------- change this to none before review */
             position: fixed; 
             z-index: 2;
             left: 0;
@@ -275,18 +275,25 @@ if(isset($_SESSION['id'])){
             position: relative;
             right:0;
             float:right;
-            width:auto;
-            height:auto;
+            width:30px;
+            height:30px;
             /* background-color: blue; */
             top:50%;
             transform: translate(0,-50%);
             margin-right:10px;
+            background-image: url('../images/delete.png');
+            background-position: center;
+            background-size: 30px 30px;
+            /* background-image:url("../images/delete.php");
+            background-size:20px 20px; */
         }
 
     </style>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+
+    <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-    <script src='../js/map.js' defer ></script>
+    <script src='../js/map.js' defer ></script> -->
+
     <script>
         var name_val=true;
         var email=true;
@@ -352,8 +359,25 @@ if(isset($_SESSION['id'])){
                 elem.style.cssText="border-bottom: 1px solid red";
             }
             else{
-                email=true;
-                elem.style.cssText="border-bottom:1px solid black ;";
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() 
+                {
+                    if (this.readyState == 4 && this.status == 200) 
+                    {
+                        if(this.responseText == 'false'){
+                            email=false;
+                            elem.value="";
+                            elem.placeholder="Email already exist";
+                            elem.style.cssText="border-bottom: 1px solid red";
+                        }
+                        else{
+                            email=true;
+                            elem.style.cssText="border-bottom:1px solid black ;";
+                        }
+                    }
+                };
+                xhttp.open("GET", "checkemail.php?email="+document.getElementById('email').value + "&id="+<?php echo $login_id ?>, true);
+                xhttp.send();
             }
         }
 
@@ -445,7 +469,7 @@ if(isset($_SESSION['id'])){
                         </div>
                     <div class="frm">
                         <input type="text" onblur="full_name(this.id)" name="name" id="nam" value="<?php echo $row_reg['name']?>" placeholder="Name" onkeypress="revok(event)">
-                        <input type="text" onblur="email_id(this.id)" name="email" value="<?php echo $row_login['email']?>" id="email" placeholder="eMail" onkeypress="revok(event)">
+                        <input type="text" onblur="email_id(this.id)" name="email" value="<?php echo $row_login['email']?>" id="email" placeholder="E-Mail" onkeypress="revok(event)">
                         <input type="password" onblur="pass(this.id)" name="password" id="passwrd" placeholder="Change Password" onkeypress="revok(event)">
                         <button id="update" onclick="check('form')">Update Account</button>
                         <button id="logout" onclick="check('logout')">Logout</button>
@@ -478,7 +502,7 @@ if(isset($_SESSION['id'])){
                             <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
                             <div class="cont_middle"><?php echo $dname ?></div>
                             <div class="cont_middle">imei :<?php echo $imei ?></div>
-                            <a href=""><div class="cont_right">delete<?php echo $dev_id ?></div></a>
+                            <a href="delete.php?id=<?php echo $dev_id ?>"><div class="cont_right"></div></a>
                         </div>
 
                         <?php

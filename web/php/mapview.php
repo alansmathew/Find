@@ -17,6 +17,7 @@ if(isset($_SESSION['id'])){
 
     $sql_dev="select * from tbl_device where login_id=$login_id";
     $result_dev=mysqli_query($con,$sql_dev);
+    $result_dev1=mysqli_query($con,$sql_dev);
     // $row_dev=mysqli_fetch_array($result_dev);
 
     ?>
@@ -103,7 +104,7 @@ if(isset($_SESSION['id'])){
 
         /* here */
         .modal {
-            display: block;          /* here <--------------------------- change this to none before review */
+            display: none;          /* here <--------------------------- change this to none before review */
             position: fixed; 
             z-index: 2;
             left: 0;
@@ -211,11 +212,11 @@ if(isset($_SESSION['id'])){
             background-color: none;
             border-bottom:1px solid black ;
             /* box-shadow:inset 10px 10px 10px 1px #0d27500c, inset -10px -10px 10px 1px white; */
-            padding-left:10px;
+            /* padding-left:10px; */
             transform: .5s ease-in-out;
         }
         .frm button{
-            width:102%;
+            width:100%;
             height:60px;
             border:none;
             color:rgb(66, 121, 193);
@@ -290,9 +291,9 @@ if(isset($_SESSION['id'])){
 
     </style>
 
-    <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-    <script src='../js/map.js' defer ></script> -->
+    <script src='../js/map.js' defer ></script>
 
     <script>
         var name_val=true;
@@ -399,20 +400,6 @@ if(isset($_SESSION['id'])){
             }
         } 
 
-        
-        // function done(){
-        //     var xhttp = new XMLHttpRequest();
-        //     xhttp.onreadystatechange = function() 
-        //     {
-        //         if (this.readyState == 4 && this.status == 200) 
-        //         {
-        //             alert(this.responseText);
-
-        //         }
-        //     };
-        //     xhttp.open("GET","propic.php?img="+document.getElementById('upload').value, true);
-        //     xhttp.send();
-        // }
     </script>
 </head>
 
@@ -430,19 +417,33 @@ if(isset($_SESSION['id'])){
         <div class="bottom_bar">
             <center>
                 <div class="cent">
+                    <?php
+                    if(mysqli_num_rows($result_dev1)>0){
+                        while($row_dev1=mysqli_fetch_array($result_dev1)){
+                            $type1=$row_dev1['type'];
+                            $dname1=$row_dev1['name'];
+                            $imei1=$row_dev1['imei'];
+                            $dev_id1=$row_dev1['device_id'];
 
-                    <div class="item">
-                        <div class="img"><img src="../images/phone.png" width="30px" height="30px" alt=""></div>
-                        <div class="cont">iphone 8</div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img src="../images/desktop.png" width="30px" height="30px" alt=""></div>
-                        <div class="cont">azuse notebook</div>
-                    </div>
-                    <div class="item">
-                        <div class="img"><img src="../images/ipad.png" width="30px" height="30px" alt=""></div>
-                        <div class="cont">ipad air</div>
-                    </div>
+                            $img1="";
+                            if($type1=='mobile'){
+                                $img1='../images/phone.png';
+                            }
+                            else if($type1=='pc'){
+                                $img1='../images/desktop.png';
+                            }
+                            else{
+                                $img1='../images/ipad.png';
+                            } ?>
+
+                            <div class="item">
+                                <div class="img"><img src="<?php echo $img1 ?>" width="30px" height="30px" alt=""></div>
+                                <div class="cont"><?php echo $dname1 ?></div>
+                            </div>
+
+                    <?php }
+                    }
+                    ?>
                 </div>
             </center>
         </div>

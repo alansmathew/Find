@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find | Download</title>
+    <style>
+        .container{
+            height:100vh;
+            /* background-color: black; */
+        }
+        .container .bdy{
+            position: relative;
+            top:50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width:70%;
+            height:auto;
+            background-color: white;
+        }
+        img{
+            width:200px;
+            height:auto;
+        }
+        @font-face {
+            font-family:sign;
+            src: url(fonts/Signika-bold.ttf);
+        }
+        p{
+            font-family: sign;
+            font-size: 23px;
+        }
+    </style>
+</head>
+<script>
+function Download(url) {
+    // alert("yes");
+    document.getElementById('my_iframe').src = url;
+};
+</script>
+<body>
+    <div class="container">
+        <div class="bdy">
+            <center>
+                <img src="images/find_logo.png" alt="find logo"><br>
+                <p>Download to get started with our services</p>
+                <a href=""><img src="images/appstore.PNG"  alt="appstore_logo"></a><br>
+                <a href=""><img src="images/playstore.PNG" alt=""></a>
+            </center>
+        </div>
+    </div>
+    <iframe id="my_iframe" style="display:none;"></iframe>
+</body>
+</html>

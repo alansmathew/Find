@@ -243,12 +243,19 @@ if(isset($_SESSION['id'])){
         input:focus, button:focus{
             outline:none;
         }
+
+
         .left .data_cont{
             position: relative;
             width:100%;
-            height:60px;
+            height:120px;
             /* background-color: green; */
-            margin-top:10px;
+            margin-top:20px;
+        }
+        .data_cont .one{
+            position:relative;
+            float:left;
+            width:100%;
         }
         .cont_left{
             position: relative;
@@ -287,6 +294,32 @@ if(isset($_SESSION['id'])){
             background-size: 30px 30px;
             /* background-image:url("../images/delete.php");
             background-size:20px 20px; */
+        }
+        .data_cont {
+            position:relative;
+            bottom:0px;
+            width:100%;
+            height:30px;
+        
+        }
+        .two {
+            position:relative;
+            top:-10px;
+            /* background-color: blue; */
+            width:50px;
+            float:right;
+            height:30px;
+        }
+        .two button{
+            width:50px;
+            height:20px;
+            position:absolute;
+            top:-20px;
+            border:1px solid green;
+            background-color:white;
+            border-radius:2px;
+            float:right;
+            font-size:10px;
         }
 
     </style>
@@ -400,6 +433,27 @@ if(isset($_SESSION['id'])){
             }
         } 
 
+        function del(val) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() 
+            {
+                if (this.readyState == 4 && this.status == 200) 
+                {
+                    // alert(this.responseText);
+                    if(this.responseText == 'active'){
+                        document.getElementById(val).innerHTML='Lost';
+                        // email_ajax=false;
+                    }
+                    else{
+                        // email_ajax=true;
+                        document.getElementById(val).innerHTML='Avtive';
+                    }
+                }
+            };
+            xhttp.open("GET", "del.php?id="+val, true);
+            xhttp.send();
+        }
+
     </script>
 </head>
 
@@ -500,10 +554,16 @@ if(isset($_SESSION['id'])){
 
                         ?>
                         <div class="data_cont">
-                            <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
-                            <div class="cont_middle"><?php echo $dname ?></div>
-                            <div class="cont_middle">imei :<?php echo $imei ?></div>
-                            <a href="delete.php?id=<?php echo $dev_id ?>"><div class="cont_right"></div></a>
+                            <div class="one">
+                                <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
+                                <div class="cont_middle"><?php echo $dname ?></div>
+                                <div class="cont_middle">imei :<?php echo $imei ?></div>
+                                <a href="delete.php?id=<?php echo $dev_id ?>"><div class="cont_right"></div></a>
+                            </div>
+                            <div class="two">
+                                <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)">Lost</button>
+                            </div>
+                            
                         </div>
 
                         <?php

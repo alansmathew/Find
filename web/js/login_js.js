@@ -57,8 +57,22 @@ function startanimation(temp){
         document.getElementById('lo').submit();
     }
 }
+function isMobile(){
+    var match = window.matchMedia || window.msMatchMedia;
+    if(match) {
+        var mq = match("(pointer:coarse)");
+        return mq.matches;
+    }
+    return false;
+}
 
 function call(){
+    el= document.getElementById("mob");
+    var type=isMobile();
+    if (type!=false){
+        el.click();
+    }
+
   st=true
   function strech(){
       if (st){

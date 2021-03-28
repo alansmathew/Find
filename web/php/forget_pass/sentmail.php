@@ -46,7 +46,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['rand']) && isset($_SESSION['otp
                         left:50%;
                         transform: translate(-50%);
                         background-color: white;
-                        width:400px;
+                        width:350px;
                     }
                     .container img{
                         width:100px;
@@ -61,30 +61,33 @@ if(isset($_SESSION['email']) && isset($_SESSION['rand']) && isset($_SESSION['otp
                         font-family: sans-serif;
                         font-size: 15px;
                         color:rgba(0, 0, 0, 0.774);
-                        margin:10px 20px 20px 3px;
+                        margin-left:10px;
+                        margin-right: 10px;
+            
                         line-height: 23px;
                     }
                     .container a{
                         text-decoration: none;
-                        font-size: 15px;
                         color: rgba(47, 154, 241, 0.753);
                         font-family: sans-serif;
                         margin-bottom: 10px;
-                        margin:3px 20px 10px 3px;
+                        font-size: 15px;
+                        margin-left:10px;
+                        margin-right: 10px;
                     }
-
+            
                 </style>
             </head>
             <body>
                 <div class="container">
-                    <img src="../../images/find_logo.png" alt=""/>
+                <img src="https://raw.githubusercontent.com/alansmathew/Find/master/web/images/find_logo100px.png" alt="Find logo" loading="lazy"/>
                     <center><h1>Hello.</h1></center>
                     <p>No need to worry, you can reset your Find password by clicking the link below or entering the OTP:</p>
-                    <a href="">Reset Password</a>
+                    <a href="https://alansmathew.000webhostapp.com/php/forget_pass/verifyotprequest.php?varify='.$rand.'">Reset Password</a>
                     <p>OTP : <b>'.$otp_data.'</b> </p>
                     <p>For security reasons this link and OTP will only be active for 3 minuties. If you didnt request a password reset, feel free to delete this email and carry on enjoying !</p>
-                    <p style="margin:0;">All the best</p>
-                    <p style="margin:0;">The Find Team</p>
+                    <p style="margin-bottom:0;">All the best</p>
+                    <p style="margin-top:0;">The Find Team.</p>
                 </div>
             </body>
             </html>
@@ -101,6 +104,6 @@ if(isset($_SESSION['email']) && isset($_SESSION['rand']) && isset($_SESSION['otp
     }
 }
 else{
-    // header("location:../forget_pass.php?err='wrong'");
+    header("location:../forget_pass.php?err='wrong'");
 }
 ?>

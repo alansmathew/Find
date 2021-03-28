@@ -147,6 +147,16 @@ body{
     background-color: rgb(94,150,224);
     border-radius: 30px;
 }
+.forget a{
+    /* color:white;
+    font-size: 14px; */
+    color: rgba(255, 255, 255, 0.748);
+    font-size: 16px;
+    letter-spacing: .6px;
+    line-height: 25px;
+    text-decoration: none;
+    /* background-color: green; */
+}
 .data{
     position: relative;
     width:80%;

@@ -1,0 +1,77 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+}
+@font-face {
+    font-family:sign;
+    src: url(../fonts/Signika.ttf);
+}
+img{
+    width: 150px;
+    height:150px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.container{
+    position: relative;
+    left:50%;
+    transform: translate(-50%);
+    width:350px;
+    border:solid rgba(0, 0, 0, 0.112) 1px;
+    border-radius: 8px;
+}
+.container h1{
+    margin-left:24px;
+    /* font-family: sans-serif; */
+    font-family: sign;
+    font-size: 30px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
+.container p{
+    margin-left:25px;
+    font-family: sans-serif;
+    /* font-family: sign; */
+    font-size: 14px;
+    margin-right:25px;
+    margin-top: 4px;
+    line-height: 20px;
+    color:rgba(0, 0, 0, 0.639);
+}
+.inputs{
+    background-color: rgb(245, 245, 245);
+    box-shadow:inset 10px 10px 10px 1px #0d275006, inset -10px -10px 10px 1px white, 28px 28px 50px 1px #0d275017, -23px -23px 40px white; 
+    border-radius:4px;
+    height:20px;
+    width:280px;
+    position: relative;
+    padding:10px;
+    border: none;
+    margin:10px 25px 10px 25px;
+}
+.inputs:focus{
+    outline: none;
+}
+.click_button{
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    width:300px;
+    height:45px;
+    margin:10px 25px 30px 25px;
+    background-color: rgb(245, 245, 245);
+    box-shadow: 10px 10px 10px 1px #0d275017,-10px -10px 10px 1px white;
+    border: 0px;
+    border-radius: 4px;
+    color:rgba(0, 0, 255, 0.714);
+}
+.click_button:hover{
+    box-shadow: 5px 5px 10px 1px #0d275017, -5px -5px 10px 1px white; 
+}
+p a{
+    color: rgb(133,179,221);
+    text-decoration: none;
+    font-size: 14px;
+    font-family: sign;
+}

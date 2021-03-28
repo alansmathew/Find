@@ -24,15 +24,16 @@
                             To keep connected with us, please login with your unique credentials. <br><br>
                             If this device is not connected and you like to make it secure, register this device after Signing in.
                     </p>
-
                     </div>
                 </div>
+
                 <div class="smallbox">
                     <div class="data">
                         <div id="c">Not yet an user ?</div><!-- # Have an account ? -->
                         <a onclick="change_page()"><p><h2 id='d'>Sign up</h2></p></a>
                     </div>
                 </div>
+                <center><p class="forget"><a href="php/forget_pass.php">Forget password ?</a></p></center>
             
         </div>
     </div>

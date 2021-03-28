@@ -1,5 +1,6 @@
 <?php
 $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
+// require("forget_pass/sentmail.php");
 
 $type=$_POST["type"];
 $data=new \stdClass();
@@ -123,6 +124,45 @@ if($type=='updateloc'){
     }
     else{
         $data->value="error";
+    }
+    echo json_encode($data);
+}
+
+
+
+//--- check email ------ 
+if($type=="confirm_email"){
+    $email = $_POST["email"];
+    $sql="SELECT * FROM tbl_login where email = '$email' ";
+    $result=mysqli_query($con,$sql);
+
+    if(mysqli_num_rows($result)>0){
+        // $data->value='yes';
+        $row=mysqli_fetch_array($result);
+        $login=$row['login_id'];
+        $sql="SELECT * FROM tbl_otp where login_id = '$login' ";
+
+        $result=mysqli_query($con,$sql);
+        $date=date('y-m-d h:i:s');
+        $otp_data=rand(100000,999999);
+
+        $seed = str_split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789');
+        shuffle($seed);
+        $rand = '';
+        foreach (array_rand($seed, 60) as $k) $rand .= $seed[$k];
+
+        if(mysqli_num_rows($result)>0){
+            $sql="update tbl_otp set otp_time='$date',otp_data='$otp_data',otp_random='$rand' where login_id=$login";
+        }
+        else{
+            $sql="insert into tbl_otp (login_id,otp_time,otp_data,otp_random) values ($login,'$date','$otp_data','$rand')";
+        }
+        mysqli_query($con,$sql);
+        $data->value='yes';
+        // sentmail($otp_data,$rand,$email);
+    }
+    else{
+        $data->value='no';
     }
     echo json_encode($data);
 }

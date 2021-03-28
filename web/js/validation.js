@@ -112,6 +112,6 @@ function phone_no(id){
 
 function val(id){
     if(name_val && email && passw && con_passw &&ph){
-        document.getElementById(id).submit;
+        document.getElementById(id).submit();
     }
 }

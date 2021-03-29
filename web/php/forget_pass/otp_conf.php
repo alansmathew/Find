@@ -4,7 +4,7 @@ session_start();
 // $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
 include("../connection.php");
 
-$url = "http://localhost/Find/web/php/find_api.php";
+$url = "../find_api.php";
 $ch = curl_init();
 $email=$_POST['email'];
 $data_array = array(

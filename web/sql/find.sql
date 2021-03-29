@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2020 at 04:46 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.1.27
+-- Generation Time: Mar 28, 2021 at 08:08 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,8 +32,21 @@ CREATE TABLE `tbl_device` (
   `login_id` int(7) NOT NULL,
   `name` varchar(40) NOT NULL,
   `type` varchar(10) NOT NULL,
-  `imei` varchar(20) NOT NULL
+  `imei` varchar(20) NOT NULL,
+  `lat` varchar(20) NOT NULL DEFAULT '0',
+  `lon` varchar(20) NOT NULL DEFAULT '0',
+  `state` varchar(20) NOT NULL DEFAULT 'active',
+  `time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_device`
+--
+
+INSERT INTO `tbl_device` (`device_id`, `login_id`, `name`, `type`, `imei`, `lat`, `lon`, `state`, `time`) VALUES
+(1, 11, 'iphone 8 plus', 'mobile', '123456789101213', '123.456', '123.4444', 'active', '00:00:00'),
+(3, 11, 'macbook pro', 'pc', '123456789101234', '37.785834', '-122.406417', 'active', '01:15:01'),
+(5, 28, 'iphone', 'mobile', '123456789012345', '0', '0', 'active', '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -46,7 +58,7 @@ CREATE TABLE `tbl_login` (
   `login_id` int(7) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(256) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1'
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -54,11 +66,22 @@ CREATE TABLE `tbl_login` (
 --
 
 INSERT INTO `tbl_login` (`login_id`, `email`, `password`, `status`) VALUES
-(8, 'alan@mca.ajce.in', '$2y$10$CV664VsvrsLnId/07tpsDOagPwYyUASuEI.AuRv3Q7SVqzPZvYRkO', 1),
-(11, 'alansmathew@icloud.com', '$2y$10$hq8X1oyI290s89X0LJAjLe2T8Jz.gKtWyGO4v9R1ZFP1bhSJ66gyS', 1),
-(12, 'alan@icloud.com', '$2y$10$Gp1F9ZLumHBxduNeRM1imO6o8XaQ94Ca5ucQZOY4V52TeCwD9J.DC', 1),
-(13, 'alansmathew@mca.ajce.in', '$2y$10$z2vOQf.cdVn8N0j6zgMskuTtct3I6amKVWQE0IaMyxZhkEfNkYova', 1),
-(14, 'albin@gmail.com', '$2y$10$Ph7ogx4VX4sO32qDOD9Ckuk/hbUPMFvDwp1wH/pINbzqBKTLy57tC', 1);
+(11, 'alansmathew@icloud.com', '$2y$10$X7iaMcQ84lXdKNbN4y86duO5QKZSyniZ02c1z0wXGJfz91qf0/qC6', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_otp`
+--
+
+CREATE TABLE `tbl_otp` (
+  `otp_id` int(7) NOT NULL,
+  `login_id` int(7) NOT NULL,
+  `otp_time` varchar(20) NOT NULL,
+  `otp_data` varchar(10) NOT NULL,
+  `otp_random` varchar(61) NOT NULL,
+  `otp_attempt` int(4) NOT NULL DEFAULT 3
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -77,9 +100,7 @@ CREATE TABLE `tbl_pic` (
 --
 
 INSERT INTO `tbl_pic` (`pic_id`, `login_id`, `filename`) VALUES
-(1, 10, 'IMG_5750.jpg'),
-(2, 11, 'IMG_6438 2.JPG'),
-(3, 13, 'IMG_1527.jpeg');
+(2, 11, 'IMG_6438 2.JPG');
 
 -- --------------------------------------------------------
 
@@ -98,11 +119,7 @@ CREATE TABLE `tbl_reg` (
 --
 
 INSERT INTO `tbl_reg` (`reg_id`, `login_id`, `name`) VALUES
-(8, 8, 'alan'),
-(11, 11, 'alansmathew'),
-(12, 12, 'alansmatehw'),
-(13, 13, 'alansmathew'),
-(14, 14, 'alan');
+(11, 11, 'alansmathew');
 
 --
 -- Indexes for dumped tables
@@ -119,6 +136,12 @@ ALTER TABLE `tbl_device`
 --
 ALTER TABLE `tbl_login`
   ADD PRIMARY KEY (`login_id`);
+
+--
+-- Indexes for table `tbl_otp`
+--
+ALTER TABLE `tbl_otp`
+  ADD PRIMARY KEY (`otp_id`);
 
 --
 -- Indexes for table `tbl_pic`
@@ -140,13 +163,19 @@ ALTER TABLE `tbl_reg`
 -- AUTO_INCREMENT for table `tbl_device`
 --
 ALTER TABLE `tbl_device`
-  MODIFY `device_id` int(7) NOT NULL AUTO_INCREMENT;
+  MODIFY `device_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `login_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `login_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `tbl_otp`
+--
+ALTER TABLE `tbl_otp`
+  MODIFY `otp_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_pic`
@@ -158,7 +187,7 @@ ALTER TABLE `tbl_pic`
 -- AUTO_INCREMENT for table `tbl_reg`
 --
 ALTER TABLE `tbl_reg`
-  MODIFY `reg_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `reg_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -28,6 +28,7 @@
         function sub(){
             
             if(email==true){
+                document.getElementById("senting").style.display="block";
                 document.getElementById('frm').submit();
             }
             else{
@@ -38,8 +39,30 @@
         }
 
     </script>
+    <style>
+        .sentingani{
+            background-color:rgb(248,248,248);
+            width:100vw;
+            height:100vh;
+            z-index:2;
+            position: absolute;
+            opacity:.86;
+            transition: 0.6s ease-in;
+        }
+        .sentingani img{
+            position:relative;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-80%);
+            width:450px;
+            height:300px;
+        }
+    </style>
 </head>
 <body>
+    <div class="sentingani" id="senting" style="display:none">
+        <img src="../images/mail.gif" alt="senting_mail...">
+    </div>
     <center><img src="../images/find_logo.png" alt=""></center>
     <div class="container">
         <h1>Password assistance</h1>

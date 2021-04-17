@@ -1,3 +1,8 @@
+<?php
+    include("../connection.php");
+    include("../log/log.php");
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +14,15 @@
 </head>
 <body>
     <?php
-        include("../connection.php");
-        session_start();
         if( isset($_SESSION['login']) && isset($_POST['password'])){
             $login=$_SESSION['login'];
             $password=$_POST['password'];
             $password = password_hash($password,PASSWORD_DEFAULT); 
             $sql="UPDATE tbl_login SET password='$password' where login_id=$login";
             mysqli_query($con,$sql);
+
+            log_activity($con,$login,'profile','Password reseted sucessfully');
+            
             session_unset();
             if(session_destroy()){
                 ?>

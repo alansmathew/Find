@@ -1,5 +1,6 @@
 <?php
 include("connection.php");
+include("log/log.php");
 if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']))
 {
     $name= $_POST['name'];
@@ -14,6 +15,9 @@ if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password']))
     if(mysqli_query($con,$sql)){
         session_start();
         $_SESSION['id']=$login_id;
+
+        log_activity($con,$login_id,'profile','New Account Creation');
+
         header("Location:mapview.php");
     }else{
         echo "something went wrong";

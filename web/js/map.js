@@ -27,31 +27,57 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWxhbnNtYXRoZXciLCJhIjoiY2toajd6dXJjMG55MDJ5d
 // }
 
 
+// var map = new mapboxgl.Map({
+//     container: 'map', // container id
+//     style: 'mapbox://styles/mapbox/outdoors-v11',
+//     center: [76.767928,9.370273],
+//     zoom: 10
+// });
+ 
+// var locator = new mapboxgl.GeolocateControl({
+//     positionOptions: {
+//         enableHighAccuracy: true
+//     },
+//     trackUserLocation: true
+// });
+
+// var scale = new mapboxgl.ScaleControl({
+//     maxWidth: 80,
+//     unit: 'imperial'
+// });
+// map.addControl(scale,'bottom-right');  
+// scale.setUnit('metric');
+
+// const nav = new mapboxgl.NavigationControl();
+// map.addControl(nav,'bottom-right');
+
+// map.addControl(locator,'bottom-right');
+
+
+// ---------- final resut
+
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/mapbox/outdoors-v11',
-    center: [76.767928,9.370273],
-    zoom: 10
-});
- 
-var locator = new mapboxgl.GeolocateControl({
+    style: 'mapbox://styles/mapbox/streets-v11',
+    center: [-96, 37.8], // starting position
+    zoom: 3 // starting zoom
+    });
+     
+    // Add geolocate control to the map.
+var locator =map.addControl(
+    new mapboxgl.GeolocateControl({
     positionOptions: {
-        enableHighAccuracy: true
+    enableHighAccuracy: true
     },
     trackUserLocation: true
-});
-
+    })
+);
 var scale = new mapboxgl.ScaleControl({
-    maxWidth: 80,
-    unit: 'imperial'
-});
-map.addControl(scale,'bottom-right');  
+        maxWidth: 80,
+        unit: 'imperial'
+    });
+map.addControl(scale,'top-right');  
 scale.setUnit('metric');
-
 const nav = new mapboxgl.NavigationControl();
-map.addControl(nav,'bottom-right');
-
-map.addControl(locator,'bottom-right');
-
-
-// https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY
+map.addControl(nav,'top-right');
+map.addControl(locator,'top-right');

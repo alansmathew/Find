@@ -104,7 +104,7 @@ if(isset($_SESSION['id'])){
 
         /* here */
         .modal {
-            display: none;          /* here <--------------------------- change this to none before review */
+            display: none;         /*  here <--------------------------- change this to none before review */
             position: fixed; 
             z-index: 2;
             left: 0;
@@ -244,15 +244,36 @@ if(isset($_SESSION['id'])){
             outline:none;
         }
 
-
-        .left .data_cont{
+        .insidecontainer{
             position: relative;
-            width:100%;
-            height:120px;
+            width:600px;
+            height:400px;
+            /* background-color:blue; */
+            left:50%;
+            transform: translate(-51%);
+            padding:0px 40px;
+            overflow:scroll;
+
+        }
+        .data_cont{
+            left:0px;
+            position: relative;
+            width:600px;
+            height:40px;
             /* background-color: green; */
             margin-top:20px;
+            padding:10px;
+            border-radius:9px;
+            background-color: rgb(245, 245, 245);
+            box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
         }
-        .data_cont .one{
+        .data_cont:hover{
+            /* background-color: rgb(66, 121, 193); */
+            box-shadow: 5px 5px 10px 1px rgb(245, 245, 245), -5px -5px 10px 1px white; 
+            /* color:white; */
+        }
+        
+        .data_cont  .one{
             position:relative;
             float:left;
             width:100%;
@@ -264,8 +285,6 @@ if(isset($_SESSION['id'])){
             width:40px;
             height:40px;
             /* background-color: blue; */
-            top:50%;
-            transform: translate(0,-50%);
             margin-left:10px;
         }
         .cont_middle{
@@ -276,7 +295,7 @@ if(isset($_SESSION['id'])){
             height:auto;
             /* background-color: blue; */
             top:50%;
-            transform: translate(0,-50%);
+            transform: translate(0,50%);
             margin-left:10px;
         }
         .cont_right{
@@ -287,39 +306,83 @@ if(isset($_SESSION['id'])){
             height:30px;
             /* background-color: blue; */
             top:50%;
-            transform: translate(0,-50%);
+            transform: translate(0,15%);
             margin-right:10px;
             background-image: url('../images/delete.png');
             background-position: center;
             background-size: 30px 30px;
-            /* background-image:url("../images/delete.php");
-            background-size:20px 20px; */
+            margin-left:30px;
         }
-        .data_cont {
-            position:relative;
-            bottom:0px;
-            width:100%;
-            height:30px;
-        
-        }
-        .two {
-            position:relative;
-            top:-10px;
-            /* background-color: blue; */
-            width:50px;
-            float:right;
-            height:30px;
-        }
-        .two button{
+
+        .one button{
             width:50px;
             height:20px;
-            position:absolute;
+            position:relative;
             top:-20px;
             border:1px solid green;
             background-color:white;
             border-radius:2px;
-            float:right;
+            float:left;
             font-size:10px;
+            top:50%;
+            transform: translate(0,-50%);
+            margin-left:30px;
+        }
+        .bottomcontainer{
+            position: relative;
+            bottom:-10px;
+            /* background-color:green; */
+            width:520px;
+            height:100px;
+            left:50%;
+            top:0%;
+            transform: translate(-50%,10%);
+        }
+        .bottomcontainer button{
+            float:left;
+            cursor: pointer;
+            width:240px;
+            margin-left:20px;
+            color: rgb(69, 116, 181);
+            border-radius: 9px;
+            border: none;
+            background-color: rgb(245, 245, 245);
+            box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
+        }
+        .bottomcontainer button:hover{
+            background-color: rgb(66, 121, 193);
+            box-shadow: 5px 5px 10px 1px rgb(66, 121, 193,0.4), -5px -5px 10px 1px white; 
+            color:white;
+        }
+        .secondcontent{
+            /* background-color: gray; */
+            width: 95%;
+            height: auto;
+            position: relative;
+            left:50%;
+            top:45%;
+            transform: translate(-45%,-50%);
+        }
+        .secondcontent p{
+            margin-top:0px;
+            margin-bottom:0px;
+            text-align: center;
+        }
+        .secondcontent button{
+            cursor: pointer;
+            margin-bottom: 30px;
+            margin-top: 10px;
+            width:100%;
+            color: rgb(129, 156, 193);
+            border-radius: 9px;
+            border: none;
+            background-color: rgb(245, 245, 245);
+            box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
+        }
+        .secondcontent button:hover{
+            background-color: rgb(66, 121, 193);
+            box-shadow: 5px 5px 10px 1px rgb(66, 121, 193,0.4), -5px -5px 10px 1px white; 
+            color:white;
         }
 
     </style>
@@ -336,9 +399,15 @@ if(isset($_SESSION['id'])){
         function cls(){
             document.getElementById("myModal").style.display="none";   
         }
+        function clsview2(){
+            document.getElementById("myModal2").style.display="none";   
+        }
 
         function popup(){
             document.getElementById("myModal").style.display= "block";
+        }
+        function popupview2(){
+            document.getElementById("myModal2").style.display= "block";
         }
 
         function upload(){
@@ -453,6 +522,10 @@ if(isset($_SESSION['id'])){
             xhttp.open("GET", "del.php?id="+val, true);
             xhttp.send();
         }
+        function openView(){
+            cls();
+            popupview2()
+        }
 
     </script>
 </head>
@@ -467,6 +540,7 @@ if(isset($_SESSION['id'])){
                     <script>document.getElementById('tumb').style.cssText="background-image: url('../images/<?php echo $row_propic['filename'] ?>');"</script><?php
                 }
             ?>
+        </div>
 
         <div class="bottom_bar">
             <center>
@@ -490,7 +564,7 @@ if(isset($_SESSION['id'])){
                                 $img1='../images/ipad.png';
                             } ?>
 
-                            <div class="item">
+                            <div class="item" onclick="openView()">
                                 <div class="img"><img src="<?php echo $img1 ?>" width="30px" height="30px" alt=""></div>
                                 <div class="cont"><?php echo $dname1 ?></div>
                             </div>
@@ -532,47 +606,66 @@ if(isset($_SESSION['id'])){
                 </form>
             </div>
             <div class="left" >
-                <?php
-                if(mysqli_num_rows($result_dev)>0){
-                    while($row_dev=mysqli_fetch_array($result_dev)){
-                        $type=$row_dev['type'];
-                        $dname=$row_dev['name'];
-                        $imei=$row_dev['imei'];
-                        $dev_id=$row_dev['device_id'];
-
-                        $img="";
-
-                        if($type=='mobile'){
-                            $img='../images/phone.png';
-                        }
-                        else if($type=='pc'){
-                            $img='../images/desktop.png';
-                        }
-                        else{
-                            $img='../images/ipad.png';
-                        }
-
-                        ?>
-                        <div class="data_cont">
-                            <div class="one">
-                                <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
-                                <div class="cont_middle"><?php echo $dname ?></div>
-                                <div class="cont_middle">imei :<?php echo $imei ?></div>
-                                <a href="delete.php?id=<?php echo $dev_id ?>"><div class="cont_right"></div></a>
-                            </div>
-                            <div class="two">
-                                <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)">Lost</button>
-                            </div>
-                            
-                        </div>
-
-                        <?php
-                    }
-                }
-                ?>
+                <div class="secondcontent">
+                    <p>To view all active devices and further informations, click and view on view device button below 👇</p>
+                    <button onclick="openView()">View device</button>
+                    <p>However if wanted to view all your log files, click on the button below 👇</p>
+                    <button onclick="location.href='pdfGenarator/pdf.php?from=view'">Generate and view logs</button>
+                    <p>If in case you needed to download all your logs and informations to take it offline, the button below 👇 is the option to go.</p>
+                    <button onclick="location.href='pdfGenarator/pdf.php?from=download'">Download logs file</button>
+                </div>
             </div>
         </div>
       
+    </div>
+</div>
+
+<!-- -------------- device view -->
+<div id="myModal2" class="modal" style="display:none">
+    <div class="modal-content">
+      <span onclick="clsview2()" class="close">&times;</span>
+        <div class="containers">
+            <div class="insidecontainer">
+                <?php
+                    if(mysqli_num_rows($result_dev)>0){
+                        while($row_dev=mysqli_fetch_array($result_dev)){
+                            $type=$row_dev['type'];
+                            $dname=$row_dev['name'];
+                            $imei=$row_dev['imei'];
+                            $dev_id=$row_dev['device_id'];
+
+                            $img="";
+
+                            if($type=='mobile'){
+                                $img='../images/phone.png';
+                            }
+                            else if($type=='pc'){
+                                $img='../images/desktop.png';
+                            }
+                            else{
+                                $img='../images/ipad.png';
+                            }
+
+                            ?>
+                            <div class="data_cont">
+                                <div class="one">
+                                    <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
+                                    <div class="cont_middle"><?php echo $dname ?></div>
+                                    <div class="cont_middle">imei :<?php echo $imei ?></div>
+                                    <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)">Lost</button>
+                                    <a href="delete.php?id=<?php echo $dev_id ?>"><div class="cont_right"></div></a>
+                                </div>          
+                            </div>
+                            <?php
+                        }
+                    }
+                    ?>
+            </div>
+            <div class="bottomcontainer">
+                <button onclick="location.href='pdfGenarator/pdf.php?from=view'">Generate and view logs</button>
+                <button onclick="location.href='pdfGenarator/pdf.php?from=download'">Download logs file</button>
+            </div>
+        </div>
     </div>
 </div>
 

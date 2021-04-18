@@ -1,8 +1,6 @@
 <?php
-session_start();
-if(isset($_SESSION['id'])){
     include("../connection.php");
-    $login_id=$_SESSION['id'];
+    $login_id=$_GET['id'];
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,15 +109,15 @@ if(isset($_SESSION['id'])){
                 <tr>
                     <th class="date">Time</th>
                     <th class="date">Date</th>
-                    <th class="dis">Activity<br>&nbsp;</th>
+                    <th class="dis">Activity<br>&nbsp;<br>&nbsp;</th>
                 </tr>
                 <?php
-                    $sql="select * from tbl_log where login_id='$login_id' and type='profile' ORDER BY datetime desc";
+                    $sql="select * from tbl_log where login_id='$login_id' and type='profile' ORDER BY log_id desc";
                     $result=mysqli_query($con,$sql);
                     while($row=mysqli_fetch_array($result))
                     {
                         echo "
-                                <tr > 
+                                <tr> 
                                     <td>".$row['date']."</td>
                                     <td>".$row['time']."</td>
                                     <td>".$row['dis']."<br>&nbsp;</td>
@@ -143,10 +141,3 @@ if(isset($_SESSION['id'])){
     </div>
 </body>
 </html>
-
-<?php
-}
-else{
-    header("location:../../index.php");
-}
-?>

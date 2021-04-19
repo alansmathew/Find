@@ -9,6 +9,7 @@ if(isset($_SESSION['id'])){
     $html2pdf = new Html2Pdf();
 
     $c = curl_init("http://localhost/Find/web/php/pdfGenarator/test.php?id=$login_id");
+    // $c = curl_init("https://alansmathew.000webhostapp.com/php/pdfGenarator/test.php?id=$login_id");
     curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
     $html = curl_exec($c);
 

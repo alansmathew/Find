@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2021 at 08:08 PM
+-- Generation Time: Apr 19, 2021 at 08:36 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -51,6 +51,35 @@ INSERT INTO `tbl_device` (`device_id`, `login_id`, `name`, `type`, `imei`, `lat`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_log`
+--
+
+CREATE TABLE `tbl_log` (
+  `log_id` int(11) NOT NULL,
+  `login_id` int(7) NOT NULL,
+  `type` varchar(10) NOT NULL,
+  `dis` varchar(200) NOT NULL,
+  `date` varchar(10) NOT NULL,
+  `time` varchar(10) NOT NULL,
+  `datetime` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_log`
+--
+
+INSERT INTO `tbl_log` (`log_id`, `login_id`, `type`, `dis`, `date`, `time`, `datetime`) VALUES
+(37, 11, 'profile', 'Profile name changed', '17-04-21', '11:58:43', '11:58:43 17-04-21'),
+(38, 11, 'profile', 'Profile Email changed', '17-04-21', '11:58:43', '11:58:43 17-04-21'),
+(39, 11, 'profile', 'Login Activity', '18-04-21', '12:00:08', '12:00:08 18-04-21'),
+(40, 11, 'profile', 'Login Activity', '18-04-21', '10:05:29', '10:05:29 18-04-21'),
+(41, 11, 'profile', 'Login Activity', '18-04-21', '12:00:39', '12:00:39 18-04-21'),
+(42, 11, 'profile', 'Login Activity', '18-04-21', '01:00:38', '01:00:38 18-04-21'),
+(43, 11, 'profile', 'Login Activity', '18-04-21', '07:35:41', '07:35:41 18-04-21');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_login`
 --
 
@@ -66,7 +95,7 @@ CREATE TABLE `tbl_login` (
 --
 
 INSERT INTO `tbl_login` (`login_id`, `email`, `password`, `status`) VALUES
-(11, 'alansmathew@icloud.com', '$2y$10$X7iaMcQ84lXdKNbN4y86duO5QKZSyniZ02c1z0wXGJfz91qf0/qC6', 1);
+(11, 'alansmathew@icloud.com', '$2y$10$fTNp9T6t8kYC7jUj7TuuIOdkkxRExOMpw0P1zuxrlWDaz0gXZ5cBK', 1);
 
 -- --------------------------------------------------------
 
@@ -132,6 +161,12 @@ ALTER TABLE `tbl_device`
   ADD PRIMARY KEY (`device_id`);
 
 --
+-- Indexes for table `tbl_log`
+--
+ALTER TABLE `tbl_log`
+  ADD PRIMARY KEY (`log_id`);
+
+--
 -- Indexes for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
@@ -166,16 +201,22 @@ ALTER TABLE `tbl_device`
   MODIFY `device_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `tbl_log`
+--
+ALTER TABLE `tbl_log`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
 -- AUTO_INCREMENT for table `tbl_login`
 --
 ALTER TABLE `tbl_login`
-  MODIFY `login_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `login_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_otp`
 --
 ALTER TABLE `tbl_otp`
-  MODIFY `otp_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `otp_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_pic`
@@ -187,7 +228,7 @@ ALTER TABLE `tbl_pic`
 -- AUTO_INCREMENT for table `tbl_reg`
 --
 ALTER TABLE `tbl_reg`
-  MODIFY `reg_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `reg_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

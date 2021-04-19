@@ -6,6 +6,7 @@ include("../connection.php");
 include("../log/log.php");
 
 // $url = "../find_api.php";
+// $url = "https://alansmathew.000webhostapp.com/php/find_api.php";
 $url="http://localhost/find/web/php/find_api.php";
 $ch = curl_init();
 $email=$_POST['email'];

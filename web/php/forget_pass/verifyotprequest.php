@@ -1,23 +1,5 @@
 <?php 
-// $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
 include("../connection.php");
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
-    <link rel="stylesheet" href="../../styles/forget_mail_style.css">
-</head>
-<body>
-
-<?php 
-// $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
-// include("../connection.php");
 
 if(isset($_GET['varify'])){
     $rand=$_GET['varify'];
@@ -35,33 +17,57 @@ if(isset($_GET['varify'])){
             header('Location:resetpassword.php');
         }
         else{
-            // echo "link expaired !";
+            echo "link expaired !";
             $sql="delete from tbl_otp where otp_random='$rand'";
             mysqli_query($con,$sql);
             ?>
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Reset Password</title>
+                    <link rel="stylesheet" href="../../styles/forget_mail_style.css">
+                </head>
+                <body>
                 <center><img src="../../images/find_logo.png" alt=""></center>
-                <div class="container">
-                    <h1>Link invalid !</h1>
-                    <p>The link you recived is either invalid for this purpose or got expaired. Please try within 3 minutes after requesting for reset password.
-                        If this problem pursues, contact customer care for further clarification...
-                    </p>
-                    <a href="../../index.php"><button class="click_button" onclick="submmmit()"> Continue to home page  </button></a>
-                </div> 
+                    <div class="container">
+                        <h1>Link invalid !</h1>
+                        <p>The link you recived is either invalid for this purpose or got expaired. Please try within 3 minutes after requesting for reset password.
+                            If this problem pursues, contact customer care for further clarification...
+                        </p>
+                        <a href="../../index.php"><button class="click_button" onclick="submmmit()"> Continue to home page  </button></a>
+                    </div> 
+                </body>
+            </html>
             <?php
         }
     }
     else{
-         // echo "link invalid !";
+        //   echo "link invalid !";
         ?>
-        <center><img src="../../images/find_logo.png" alt=""></center>
-        <div class="container">
-            <h1>Link invalid !</h1>
-            <p>The link you received is either invalid for this purpose or got expaired. Please try within 3 minutes after requesting for reset password.
-                If this problem pursues, contact customer care for further clarification...
-            </p>
-            <a href="../../index.php"><button class="click_button" onclick="submmmit()"> Continue to home page  </button></a>
-        </div> 
-<?php
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Reset Password</title>
+                    <link rel="stylesheet" href="../../styles/forget_mail_style.css">
+                </head>
+                <body>
+                <center><img src="../../images/find_logo.png" alt=""></center>
+                    <div class="container">
+                        <h1>Link invalid !</h1>
+                        <p>The link you recived is either invalid for this purpose or got expaired. Please try within 3 minutes after requesting for reset password.
+                            If this problem pursues, contact customer care for further clarification...
+                        </p>
+                        <a href="../../index.php"><button class="click_button" onclick="submmmit()"> Continue to home page  </button></a>
+                    </div> 
+                </body>
+            </html>
+        <?php
     }
 }
 elseif(isset($_POST['otp'])){
@@ -92,19 +98,28 @@ elseif(isset($_POST['otp'])){
 else{
     // echo "unAuthorized Access";
     ?>
-        <center><img src="../../images/find_logo.png" alt=""></center>
-        <div class="container">
-            <h1>Link invalid !</h1>
-            <p>The link you received is either invalid for this purpose or got expaired. Please try within 3 minutes after requesting for reset password.
-                If this problem pursues, contact customer care for further clarification...
-            </p>
-            <a href="../../index.php"><button class="click_button" onclick="submmmit()"> Continue to home page  </button></a>
-        </div> 
-    <?php
+            <!DOCTYPE html>
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Reset Password</title>
+                    <link rel="stylesheet" href="../../styles/forget_mail_style.css">
+                </head>
+                <body>
+                <center><img src="../../images/find_logo.png" alt=""></center>
+                    <div class="container">
+                        <h1>Link invalid !</h1>
+                        <p>The link you recived is either invalid for this purpose or got expaired. Please try within 3 minutes after requesting for reset password.
+                            If this problem pursues, contact customer care for further clarification...
+                        </p>
+                        <a href="../../index.php"><button class="click_button" onclick="submmmit()"> Continue to home page  </button></a>
+                    </div> 
+                </body>
+            </html>
+        <?php
     }
 
 ?>
 <!-- web/php/forget_pass/verifyotprequest.php?varify=xUrW3nK0ZszDumkd9IMcGTj4ybtpVX52SwO8EAhgqPlYFRv71NifBeQHLo6a -->
-
-</body>
-</html>

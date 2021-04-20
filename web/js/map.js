@@ -1,4 +1,5 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWxhbnNtYXRoZXciLCJhIjoiY2toajd6dXJjMG55MDJ5dnNndTkybjNiNiJ9.V9-hx2TNgdlWK8MvegCI2Q';
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiYWxhbnNtYXRoZXciLCJhIjoiY2toajd6dXJjMG55MDJ5dnNndTkybjNiNiJ9.V9-hx2TNgdlWK8MvegCI2Q";
 // navigator.geolocation.getCurrentPosition(successLocation,
 //     errorLocation,{
 //         enableHighAccuracy:true,
@@ -26,14 +27,13 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWxhbnNtYXRoZXciLCJhIjoiY2toajd6dXJjMG55MDJ5d
 //     map.addControl(nav,'bottom-right');
 // }
 
-
 // var map = new mapboxgl.Map({
 //     container: 'map', // container id
 //     style: 'mapbox://styles/mapbox/outdoors-v11',
 //     center: [76.767928,9.370273],
 //     zoom: 10
 // });
- 
+
 // var locator = new mapboxgl.GeolocateControl({
 //     positionOptions: {
 //         enableHighAccuracy: true
@@ -45,7 +45,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWxhbnNtYXRoZXciLCJhIjoiY2toajd6dXJjMG55MDJ5d
 //     maxWidth: 80,
 //     unit: 'imperial'
 // });
-// map.addControl(scale,'bottom-right');  
+// map.addControl(scale,'bottom-right');
 // scale.setUnit('metric');
 
 // const nav = new mapboxgl.NavigationControl();
@@ -53,31 +53,31 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWxhbnNtYXRoZXciLCJhIjoiY2toajd6dXJjMG55MDJ5d
 
 // map.addControl(locator,'bottom-right');
 
-
 // ---------- final resut
 
 var map = new mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center: [-96, 37.8], // starting position
-    zoom: 3 // starting zoom
-    });
-     
-    // Add geolocate control to the map.
-var locator =map.addControl(
-    new mapboxgl.GeolocateControl({
+  container: "map", // container id
+  style: "mapbox://styles/mapbox/streets-v11",
+  center: [76.7277861, 9.5209444], // starting position
+  zoom: 3, // starting zoom
+});
+
+// Add geolocate control to the map.
+var locator = map.addControl(
+  new mapboxgl.GeolocateControl({
     positionOptions: {
-    enableHighAccuracy: true
+      enableHighAccuracy: true,
     },
-    trackUserLocation: true
-    })
+    trackUserLocation: true,
+  })
 );
 var scale = new mapboxgl.ScaleControl({
-        maxWidth: 80,
-        unit: 'imperial'
-    });
-map.addControl(scale,'top-right');  
-scale.setUnit('metric');
+  maxWidth: 80,
+  unit: "imperial",
+});
+map.addControl(scale, "top-right");
+scale.setUnit("metric");
 const nav = new mapboxgl.NavigationControl();
-map.addControl(nav,'top-right');
-map.addControl(locator,'top-right');
+map.addControl(nav, "top-right");
+map.addControl(locator, "top-right");
+

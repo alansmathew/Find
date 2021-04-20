@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2021 at 08:36 AM
+-- Generation Time: Apr 20, 2021 at 02:31 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -44,9 +44,8 @@ CREATE TABLE `tbl_device` (
 --
 
 INSERT INTO `tbl_device` (`device_id`, `login_id`, `name`, `type`, `imei`, `lat`, `lon`, `state`, `time`) VALUES
-(1, 11, 'iphone 8 plus', 'mobile', '123456789101213', '123.456', '123.4444', 'active', '00:00:00'),
-(3, 11, 'macbook pro', 'pc', '123456789101234', '37.785834', '-122.406417', 'active', '01:15:01'),
-(5, 28, 'iphone', 'mobile', '123456789012345', '0', '0', 'active', '00:00:00');
+(1, 11, 'iphone 8 plus', 'mobile', '123456789101213', '9.520925', '76.728531', 'active', '00:00:00'),
+(3, 11, 'macbook pro', 'pc', '123456789101234', '9.520946', '76.728335', 'active', '01:15:01');
 
 -- --------------------------------------------------------
 
@@ -73,9 +72,7 @@ INSERT INTO `tbl_log` (`log_id`, `login_id`, `type`, `dis`, `date`, `time`, `dat
 (38, 11, 'profile', 'Profile Email changed', '17-04-21', '11:58:43', '11:58:43 17-04-21'),
 (39, 11, 'profile', 'Login Activity', '18-04-21', '12:00:08', '12:00:08 18-04-21'),
 (40, 11, 'profile', 'Login Activity', '18-04-21', '10:05:29', '10:05:29 18-04-21'),
-(41, 11, 'profile', 'Login Activity', '18-04-21', '12:00:39', '12:00:39 18-04-21'),
-(42, 11, 'profile', 'Login Activity', '18-04-21', '01:00:38', '01:00:38 18-04-21'),
-(43, 11, 'profile', 'Login Activity', '18-04-21', '07:35:41', '07:35:41 18-04-21');
+(41, 11, 'profile', 'Login Activity', '18-04-21', '12:00:39', '12:00:39 18-04-21');
 
 -- --------------------------------------------------------
 
@@ -204,7 +201,7 @@ ALTER TABLE `tbl_device`
 -- AUTO_INCREMENT for table `tbl_log`
 --
 ALTER TABLE `tbl_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `tbl_login`
@@ -216,7 +213,7 @@ ALTER TABLE `tbl_login`
 -- AUTO_INCREMENT for table `tbl_otp`
 --
 ALTER TABLE `tbl_otp`
-  MODIFY `otp_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `otp_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_pic`

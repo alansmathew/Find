@@ -344,18 +344,25 @@ if (isset($_SESSION['id'])) {
             }
 
             .one button {
-                width: 50px;
-                height: 20px;
-                position: relative;
-                top: -20px;
-                border: 1px solid green;
-                background-color: white;
-                border-radius: 2px;
+                cursor: pointer;
+                height: 40px;
+                width: 80px;
+                margin-left: 20px;
+                color: green;
+                border-radius: 9px;
+                border: none;
+                background-color: rgba(0, 0, 0, 0.0);
+                box-shadow: 10px 10px 10px 1px #b8b8b80b, -10px -10px 10px 1px rgba(255, 255, 255, 0.235);
                 float: left;
-                font-size: 10px;
+                font-size: 13px;
+                letter-spacing: 1.2px;
                 top: 50%;
                 transform: translate(0, -50%);
                 margin-left: 30px;
+            }
+
+            .one button:hover {
+                box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.05), -10px -10px 10px 1px rgba(255, 255, 255, 0.9);
             }
 
             .bottomcontainer {
@@ -419,6 +426,25 @@ if (isset($_SESSION['id'])) {
                 background-color: rgb(66, 121, 193);
                 box-shadow: 5px 5px 10px 1px rgb(66, 121, 193, 0.4), -5px -5px 10px 1px white;
                 color: white;
+            }
+
+            .loading_window {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                z-index: 10;
+                background-color: white;
+                opacity: .8;
+                display: none;
+            }
+
+            .loading_window img {
+                position: relative;
+                width: 100px;
+                height: 100px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
         </style>
 
@@ -530,16 +556,20 @@ if (isset($_SESSION['id'])) {
             }
 
             function del(val) {
+                lod = document.getElementById('loading_win');
+                lod.style.cssText = "display:block";
                 var xhttp = new XMLHttpRequest();
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         // alert(this.responseText);
                         if (this.responseText == 'active') {
-                            document.getElementById(val).innerHTML = 'Lost';
+                            document.getElementById(val).innerHTML = 'Lost ?';
+                            lod.style.cssText = "display:none";
                             // email_ajax=false;
                         } else {
                             // email_ajax=true;
-                            document.getElementById(val).innerHTML = 'Avtive';
+                            document.getElementById(val).innerHTML = 'Avtive ?';
+                            lod.style.cssText = "display:none";
                         }
                     }
                 };
@@ -573,6 +603,10 @@ if (isset($_SESSION['id'])) {
     </head>
 
     <body onload="pointlocations()">
+        <div class="loading_window" id="loading_win">
+            <!--loading window for lost and active switching -->
+            <img src="../images/loading_window.gif" alt="loding window">
+        </div>
 
         <div id='map'>
             <div class="user" width="45px" height="45px" id="tumb" onclick="popup()">
@@ -658,9 +692,9 @@ if (isset($_SESSION['id'])) {
                             <p>To view all active devices and further informations, click and view on view device button below 👇</p>
                             <button onclick="openView()">View device</button>
                             <p>However if wanted to view all your log files, click on the button below 👇</p>
-                            <button onclick="location.href='pdfGenarator/pdf.php?from=view'">Generate and view logs</button>
+                            <a href="pdfGenarator/pdf.php?from=view" target="_blank"><button>Generate and view logs</button></a>
                             <p>If in case you needed to download all your logs and informations to take it offline, the button below 👇 is the option to go.</p>
-                            <button onclick="location.href='pdfGenarator/pdf.php?from=download'">Download logs file</button>
+                            <a href="pdfGenarator/pdf.php?from=download" target="_blank"><button>Download logs file</button></a>
                         </div>
                     </div>
                 </div>
@@ -698,7 +732,12 @@ if (isset($_SESSION['id'])) {
                                         <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
                                         <div class="cont_middle"><?php echo $dname ?></div>
                                         <div class="cont_middle">imei :<?php echo $imei ?></div>
-                                        <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)">Lost</button>
+                                        <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)">
+                                            <?php
+                                            if ($row_dev['state'] == 'lost') echo 'Active ?';
+                                            else echo "Lost ?";
+                                            ?>
+                                        </button>
                                         <a href="delete.php?id=<?php echo $dev_id ?>">
                                             <div class="cont_right"></div>
                                         </a>
@@ -710,8 +749,8 @@ if (isset($_SESSION['id'])) {
                         ?>
                     </div>
                     <div class="bottomcontainer">
-                        <button onclick="location.href='pdfGenarator/pdf.php?from=view'">Generate and view logs</button>
-                        <button onclick="location.href='pdfGenarator/pdf.php?from=download'">Download logs file</button>
+                        <a href="pdfGenarator/pdf.php?from=view" target="_blank"><button>Generate and view logs</button></a>
+                        <a href="pdfGenarator/pdf.php?from=download" target="_blank"><button>Download logs file</button></a>
                     </div>
                 </div>
             </div>

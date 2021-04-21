@@ -7,12 +7,19 @@ if(isset($_SESSION['id'])){
     $login_id=$_SESSION['id'];
 
     $sql="SELECT * FROM `tbl_pic` where login_id = $login_id";
-    $row=mysqli_fetch_array(mysqli_query($con,$sql));
-    $image=$row['filename']; // image file name
+    $res=mysqli_query($con,$sql);
+    if(mysqli_num_rows($res)>0){
+        $row=mysqli_fetch_array($res);
+        $image=$row['filename']; // image file name
+    }
+    else{
+        $image="user.png";
+    }
 
     $sql="SELECT * FROM `tbl_reg` where login_id = $login_id";
     $row=mysqli_fetch_array(mysqli_query($con,$sql));
     $username=$row['name']; // user full name
+    
 
     $html2pdf = new Html2Pdf();
 

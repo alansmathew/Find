@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION['id'])) {
     include("connection.php");
+    include("../confidential.php");
     $login_id = $_SESSION['id'];
     $sql_login = "select * from tbl_login where login_id=$login_id";
     $result = mysqli_query($con, $sql_login);
@@ -277,93 +278,128 @@ if (isset($_SESSION['id'])) {
                 transform: translate(-51%);
                 padding: 0px 40px;
                 overflow: scroll;
-
-            }
-
-            .data_cont {
-                left: 0px;
                 position: relative;
-                width: 600px;
-                height: 40px;
-                /* background-color: green; */
-                margin-top: 20px;
-                padding: 10px;
-                border-radius: 9px;
-                background-color: rgb(245, 245, 245);
-                box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content:center;
             }
+/* new one */
+            .devicebox{
+            position: relative;
+            width:250px;
+            height:300px;
+            margin:20px;
+            /* background-color: aliceblue; */
+            background-color: rgb(245, 245, 245);
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
 
-            .data_cont:hover {
-                /* background-color: rgb(66, 121, 193); */
-                box-shadow: 5px 5px 10px 1px rgb(245, 245, 245), -5px -5px 10px 1px white;
-                /* color:white; */
-            }
+        }
+        .heading_box{
+            position: relative;
+            width:220px;
+            height:60px;
+            margin: 15px;
+            /* background-color: antiquewhite; */
+        }
+        .headding_content{
+            float: left;
+            width:170px;
+            height:100%;
+            /* background: beige; */
+        }
 
-            .data_cont .one {
-                position: relative;
-                float: left;
-                width: 100%;
-            }
+        .device_image_box{
+            float: right;
+            width:50px;
+            height: 100%;
+            /* background: blueviolet; */
+        }
+        .device_image_box img{
+            width: 100%;
+            height:75%;
+            object-fit: contain;
+        }
+        .device_name_heading{
+            width: 100%;
+            height:24px;
+            /* background: brown; */
+            font-size: 20px;
+            font-family: sans-serif;
+        }
+        .device_address{
+            padding-top: 5px;
+            width:100%;
+            height: 76px;
+            font-size: 12px;
+            color:rgb(70, 70, 70);
+            font-family: sans-serif;
+        }
+        .devicebox .remove_button{
+            position: absolute;
+            bottom: 10px;
+            width:100%;
+            height: 30px;
+            color: red;
+            font-size: 17px;
+            font-family: sans-serif;
+            border:none;
+            background-color: inherit;
+            cursor: pointer;
+            transition: ease-in-out .1s all;
+        }
+        .remove_button:hover{
+            font-size: 17.5px;
+        }
+        .device_state_box{
+            position: relative;
+            width:220px;
+            height:140px;
+            margin: 15px;
+            background-color: rgba(230, 230, 250, 0.427);
+            border-radius: 10px;
+        }
+        .device_state_box .device_lost_class{
+            position: absolute;
+            width: 100%;
+            font-size: 13px;
+            font-family: sans-serif;
+            border:none;
+            padding-top: 7px;
+            bottom:10px;
+            height: 20px;
+            color:blue;
+            cursor: pointer;
+            background-color: rgba(230, 230, 250, 0);
+            transition: all ease-in-out .1s;
+        }
+        .device_lost_class:hover{
+            font-size: 13.6px;
+        }
+        .device_state_box .heading_of_device_state{
+            width: 100%;
+            font-family: sans-serif;
+            font-size: 14.5px;
+            text-align: center;
+            padding-top:10px;
+            padding-bottom: 5px;
+            border-bottom:1px dotted rgba(82, 82, 82, 0.125);
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            /* background-color: khaki; */
+        }
+        .actual_adress_box{
+            /* background-color: khaki; */
+            font-size: 13px;
+            font-family: sans-serif;
+            color:rgba(53, 53, 53, 0.872);
+            margin: 7px;
+            height: 65px;
+            overflow: scroll;
+        }
 
-            .cont_left {
-                position: relative;
-                left: 0;
-                float: left;
-                width: 40px;
-                height: 40px;
-                /* background-color: blue; */
-                margin-left: 10px;
-            }
-
-            .cont_middle {
-                position: relative;
-                left: 0;
-                float: left;
-                width: auto;
-                height: auto;
-                /* background-color: blue; */
-                top: 50%;
-                transform: translate(0, 50%);
-                margin-left: 10px;
-            }
-
-            .cont_right {
-                position: relative;
-                right: 0;
-                float: right;
-                width: 30px;
-                height: 30px;
-                /* background-color: blue; */
-                top: 50%;
-                transform: translate(0, 15%);
-                margin-right: 10px;
-                background-image: url('../images/delete.png');
-                background-position: center;
-                background-size: 30px 30px;
-                margin-left: 30px;
-            }
-
-            .one button {
-                cursor: pointer;
-                height: 40px;
-                width: 80px;
-                margin-left: 20px;
-                color: green;
-                border-radius: 9px;
-                border: none;
-                background-color: rgba(0, 0, 0, 0.0);
-                box-shadow: 10px 10px 10px 1px #b8b8b80b, -10px -10px 10px 1px rgba(255, 255, 255, 0.235);
-                float: left;
-                font-size: 13px;
-                letter-spacing: 1.2px;
-                top: 50%;
-                transform: translate(0, -50%);
-                margin-left: 30px;
-            }
-
-            .one button:hover {
-                box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.05), -10px -10px 10px 1px rgba(255, 255, 255, 0.9);
-            }
+  /* till herer  */
 
             .bottomcontainer {
                 position: relative;
@@ -563,12 +599,14 @@ if (isset($_SESSION['id'])) {
                     if (this.readyState == 4 && this.status == 200) {
                         // alert(this.responseText);
                         if (this.responseText == 'active') {
-                            document.getElementById(val).innerHTML = 'Lost ?';
+                            document.getElementById("changestatusofdevice").innerHTML = 'Current status : Active';
+                            document.getElementById(val).innerHTML = 'Mark as Lost';
                             lod.style.cssText = "display:none";
                             // email_ajax=false;
                         } else {
                             // email_ajax=true;
-                            document.getElementById(val).innerHTML = 'Avtive ?';
+                            document.getElementById("changestatusofdevice").innerHTML = 'Current status : Lost';
+                            document.getElementById(val).innerHTML = 'Mark as Avtive';
                             lod.style.cssText = "display:none";
                         }
                     }
@@ -725,24 +763,40 @@ if (isset($_SESSION['id'])) {
                                 } else {
                                     $img = '../images/ipad.png';
                                 }
+                            
+                                $url=$googlemapAPI.$lat.','.$lon;
+                                $ch = curl_init();
+                                curl_setopt($ch, CURLOPT_URL, $url);
+                                curl_setopt($ch, CURLOPT_POST, false); 
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                $result = curl_exec($ch);
+                                $decode = json_decode($result);
+                                $deviceaddress=$decode->results[0]->formatted_address;
 
                         ?>
-                                <div class="data_cont">
-                                    <div class="one">
-                                        <img id="im" width="30px" height="30px" class="cont_left" src="<?php echo $img ?>">
-                                        <div class="cont_middle"><?php echo $dname ?></div>
-                                        <div class="cont_middle">imei :<?php echo $imei ?></div>
-                                        <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)">
-                                            <?php
-                                            if ($row_dev['state'] == 'lost') echo 'Active ?';
-                                            else echo "Lost ?";
-                                            ?>
-                                        </button>
-                                        <a href="delete.php?id=<?php echo $dev_id ?>">
-                                            <div class="cont_right"></div>
-                                        </a>
+                            <div class="devicebox">
+                                <div class="heading_box">
+                                    <div class="headding_content">
+                                        <div class="device_name_heading"><?php echo $dname ?></div>
+                                        <div class="device_address">Last seen : 24/04/21 24:55</div>
                                     </div>
+                                    <div class="device_image_box"><img src="<?php echo $img ?>" alt=""></div>
                                 </div>
+                                <div class="device_state_box">
+                                    <div class="heading_of_device_state" id="changestatusofdevice">Current status : Active</div>
+                                    <div class="actual_adress_box">
+                                        Last seen in : <div class="googledata"><?php echo($deviceaddress) ?></div>
+                                    </div>
+                                    <button id="<?php echo $dev_id ?>" onclick="del(<?php echo $dev_id ?>)" class="device_lost_class">Mark as 
+                                        <?php
+                                            if ($row_dev['state'] == 'lost') echo 'Active';
+                                            else echo "Lost";
+                                        ?>
+                                    </button>
+                                </div>
+                                <a href="delete.php?id=<?php echo $dev_id ?>"><button class="remove_button">Remove</button></a>
+                            </div>
+
                         <?php
                             }
                         }

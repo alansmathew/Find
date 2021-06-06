@@ -605,3 +605,4 @@ web/php/pdfGenarator/pdf/vendor/tecnickcom/tcpdf/include/barcodes/qrcode.php
 web/php/pdfGenarator/pdf/vendor/tecnickcom/tcpdf/tools/.htaccess
 web/php/pdfGenarator/pdf/vendor/tecnickcom/tcpdf/tools/convert_fonts_examples.txt
 web/php/pdfGenarator/pdf/vendor/tecnickcom/tcpdf/tools/tcpdf_addfont.php
+web/confidential.php

@@ -33,8 +33,7 @@ $data=new \stdClass();
 // -------------------- registration  ---------------------
 
 
-    if($type=='register')
-    {
+    if($type=='register'){
         $name=$_POST['name'];
         $email=$_POST['email'];
         $password=$_POST['password'];
@@ -71,6 +70,7 @@ $data=new \stdClass();
         $res=mysqli_query($con,$sql);
         if(mysqli_num_rows($res)==0){
             $data->value="not_in_use";
+            
         }
         else{
             $data->value="already_in_use";
@@ -165,5 +165,9 @@ if($type=="confirm_email"){
     }
     echo json_encode($data);
 }
+
+
+
+
 
 ?>

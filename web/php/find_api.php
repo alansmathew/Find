@@ -3,32 +3,32 @@ $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to ser
 
 $type=$_POST["type"];
 $data=new \stdClass();
-// $type='updateIMEI';
+// $type='userdetails';
 
 // ---------------- check vaild login ? ---------------------
 
-    if($type=="signin"){
-        $email = $_POST['email'];
-        $password=$_POST['password'];
-        
-        $sql="select * from tbl_login where email='$email' and status=1";
-        if($result=mysqli_query($con,$sql)){
-            $row=mysqli_fetch_array($result);
-            if(mysqli_num_rows($result)==1 && password_verify($password,$row['password'])){
-                $data->value="valid";
-                $data->login_id=$row['login_id'];
-            }
-            else{
-                $data->value="incorrect";
-                $data->login_id="";
-            }
+if($type=="signin"){
+    $email = $_POST['email'];
+    $password=$_POST['password'];
+    
+    $sql="select * from tbl_login where email='$email' and status=1";
+    if($result=mysqli_query($con,$sql)){
+        $row=mysqli_fetch_array($result);
+        if(mysqli_num_rows($result)==1 && password_verify($password,$row['password'])){
+            $data->value="valid";
+            $data->login_id=$row['login_id'];
         }
         else{
-            $data->value="querry error";
+            $data->value="incorrect";
             $data->login_id="";
         }
-        echo json_encode($data);
     }
+    else{
+        $data->value="querry error";
+        $data->login_id="";
+    }
+    echo json_encode($data);
+}
 
 // -------------------- registration  ---------------------
 
@@ -63,20 +63,20 @@ $data=new \stdClass();
 
 // ---------------------- check imei ----------------
     
-    if($type=='imeicheck'){
-        $login_id=$_POST['login_id'];
-        $imei=$_POST['imei'];
-        $sql="select * from tbl_device where imei =$imei and login_id=$login_id";
-        $res=mysqli_query($con,$sql);
-        if(mysqli_num_rows($res)==0){
-            $data->value="not_in_use";
+    // if($type=='imeicheck'){
+    //     $login_id=$_POST['login_id'];
+    //     $imei=$_POST['imei'];
+    //     $sql="select * from tbl_device where imei =$imei and login_id=$login_id";
+    //     $res=mysqli_query($con,$sql);
+    //     if(mysqli_num_rows($res)==0){
+    //         $data->value="not_in_use";
             
-        }
-        else{
-            $data->value="already_in_use";
-        }
-        echo json_encode($data);
-    }
+    //     }
+    //     else{
+    //         $data->value="already_in_use";
+    //     }
+    //     echo json_encode($data);
+    // }
 
 // ---------------------- update imei ----------------
     
@@ -127,8 +127,6 @@ if($type=='updateloc'){
     echo json_encode($data);
 }
 
-
-
 //--- check email ------ 
 if($type=="confirm_email"){
     $email = $_POST["email"];
@@ -167,7 +165,73 @@ if($type=="confirm_email"){
 }
 
 
+//--------------- register device --------------
+if($type == "registerdevice"){
+    // echo("regiater deive");
+    $loginid=$_POST['loginid'];
+    $imei=$_POST['imei'];
+    $devicename=$_POST['devicename'];
+    $devicetype=$_POST['devicetype'];//mobile
+    $lat=$_POST['lat'];
+    $lon=$_POST['lon'];
+    $datetime =date('h:i:s d-m-y');
+
+    $sql="insert into tbl_device (login_id,name,type,imei,state,time,lat,lon) values($loginid,'$devicename','$devicetype','$imei','active','$datetime','$lat','$lon')";
+    if(mysqli_query($con,$sql)){
+        // echo "done";
+        $device_id=mysqli_insert_id($con);
+        $data->value = "done";
+        $data->device_id = $device_id;
+    }
+    else{
+        // echo "failed";
+        $data->value = "failed";
+        $data->device_id = "";
+    }
+    echo json_encode($data);
+
+}
+
+//----------------delete device form list when logout from mobile ----------
+
+if($type == "deleteDevice"){
+    $device_id=$_POST['deviceId'];
+    $sql="delete from tbl_device WHERE device_id=$device_id";
+    if(mysqli_query($con,$sql)){
+        // echo "deleted";
+        $data->value = "deleted";
+    }
+    else{
+        // echo "failed";
+        $data->value = "failed";
+    }
+    echo json_encode($data);
+}
+
+//-------------- get user details ----------------
+if($type == "userdetails"){
+    $login_id = $_POST['login_id'];
+    $sql="SELECT * FROM tbl_reg where login_id = $login_id";
+    if($result=mysqli_query($con,$sql)){
+        $row = mysqli_fetch_array($result);
+        $sql="SELECT * FROM tbl_pic where login_id = $login_id";
+        if($result=mysqli_query($con,$sql)){
+            if(mysqli_num_rows($result)>0){
+                $row1=mysqli_fetch_array($result);
+                $data->image = $row1['filename'];
+            }
+            else{$data->image = "user.png";}
+        }
+        
+        $data->value= 'true';
+        $data->name = $row['name'];
+    }
+    else{
+        $data->value = 'false';
+    }
+    echo json_encode($data);
+}
 
 
-
+// http://localhost/find/web/php/find_api.php?loginid=11&imei=%2212345678901234567891233222222222222123123123123123123123123%22&devicename=%22testdevice%22&type=%22mobile%22&lat=%2212,0000%22&lon=%2213,000%22&status=%22active%22
 ?>

@@ -3,7 +3,7 @@ $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to ser
 
 $type=$_POST["type"];
 $data=new \stdClass();
-// $type='userdetails';
+// $type='listdevice';
 
 // ---------------- check vaild login ? ---------------------
 
@@ -174,7 +174,7 @@ if($type == "registerdevice"){
     $devicetype=$_POST['devicetype'];//mobile
     $lat=$_POST['lat'];
     $lon=$_POST['lon'];
-    $datetime =date('h:i:s d-m-y');
+    $datetime =date('h:i:s y-m-d');
 
     $sql="insert into tbl_device (login_id,name,type,imei,state,time,lat,lon) values($loginid,'$devicename','$devicetype','$imei','active','$datetime','$lat','$lon')";
     if(mysqli_query($con,$sql)){
@@ -228,6 +228,64 @@ if($type == "userdetails"){
     }
     else{
         $data->value = 'false';
+    }
+    echo json_encode($data);
+}
+
+// ----------- list all devices and location details --------------
+
+if($type == "listdevice"){
+    $login_id=$_POST['loginId'];
+    $sql="select * from tbl_device where login_id = $login_id";
+    if($result=mysqli_query($con,$sql)){
+        if(mysqli_num_rows($result)>0){
+            $device = array();
+            while($row = mysqli_fetch_array($result)){
+               
+                $actualTime= new DateTime(date('h:i:s y-m-d'));
+                $difference = $actualTime->diff(new DateTime(date($row['time'])));
+                $years=$difference->y;
+                $month=$difference->m;
+                $day=$difference->d;
+                $hours=$difference->h;
+                $min=$difference->i;
+
+                $datetimeDifference='';
+                if($years == 0 && $month == 0 && $day ==0 && $hours ==0 && $min > 0 ){
+                    $datetimeDifference = $min." min";
+                }
+                elseif($years == 0 && $month == 0 && $day ==0 && $hours > 0 ){
+                    $datetimeDifference = $hours.':'.$min." hrs";
+                }
+                elseif($years == 0 && $month == 0 && $day > 0 ){
+                    $datetimeDifference = $day.' days '.$hours.' hrs';
+                }
+                elseif($years == 0 && $month > 0 ){
+                    $datetimeDifference = $month.' months '.$day.' day';
+                }
+                elseif($years > 0 ){
+                    $datetimeDifference = $years.' year '.$month.' months';
+                }
+                else{
+                    $datetimeDifference = 'Now';
+                }
+                $temp=array("deviceID"=>$row['device_id'],"name"=>$row['name'],"type"=>$row['type'],"lat"=>$row['lat'],"lon"=>$row['lon'],"time"=>$datetimeDifference,"state"=>$row['state']);
+                array_push($device,$temp);
+                // echo $difference->days;
+
+            }
+
+        $data->value = $device;
+        //    echo ($device);  
+        }
+        else{
+            $data->value = 'noDevice';
+            // echo "no devices found!";
+        }
+    }
+    else{
+        $data->value = 'Error';
+        // echo 'some error occured';
     }
     echo json_encode($data);
 }

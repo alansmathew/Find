@@ -1,9 +1,9 @@
 <?php
 $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
 
-$type=$_POST["type"];
+// $type=$_POST["type"];
 $data=new \stdClass();
-// $type='listdevice';
+$type='registerdevice';
 
 // ---------------- check vaild login ? ---------------------
 
@@ -176,7 +176,9 @@ if($type == "registerdevice"){
     $lon=$_POST['lon'];
     $datetime =date('h:i:s y-m-d');
 
-    $sql="insert into tbl_device (login_id,name,type,imei,state,time,lat,lon) values($loginid,'$devicename','$devicetype','$imei','active','$datetime','$lat','$lon')";
+    $removedSpecialCharDevicename = str_replace( array( '\'', '"',',' , ';', '<', '>' ), '', $devicename);
+
+    $sql="insert into tbl_device (login_id,name,type,imei,state,time,lat,lon) values('$loginid','$removedSpecialCharDevicename','mobile','$imei','active','$datetime','$lat','$lon')";
     if(mysqli_query($con,$sql)){
         // echo "done";
         $device_id=mysqli_insert_id($con);
@@ -269,22 +271,26 @@ if($type == "listdevice"){
                 else{
                     $datetimeDifference = 'Now';
                 }
+
                 $temp=array("deviceID"=>$row['device_id'],"name"=>$row['name'],"type"=>$row['type'],"lat"=>$row['lat'],"lon"=>$row['lon'],"time"=>$datetimeDifference,"state"=>$row['state']);
                 array_push($device,$temp);
                 // echo $difference->days;
 
             }
 
-        $data->value = $device;
+        $data->value = 'devices';
+        $data->devices = $device;
         //    echo ($device);  
         }
         else{
             $data->value = 'noDevice';
+            $data->devices = '';
             // echo "no devices found!";
         }
     }
     else{
         $data->value = 'Error';
+        $data->devices = '';
         // echo 'some error occured';
     }
     echo json_encode($data);

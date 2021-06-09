@@ -753,6 +753,38 @@ if (isset($_SESSION['id'])) {
                                 $dname = $row_dev['name'];
                                 $imei = $row_dev['imei'];
                                 $dev_id = $row_dev['device_id'];
+                                $newlat = $row_dev['lat'];
+                                $newlon = $row_dev['lon'];
+                                $time = $row_dev['time'];
+
+                                $actualTime= new DateTime(date('h:i:s y-m-d'));
+                                $difference = $actualTime->diff(new DateTime(date($time)));
+                                $years=$difference->y;
+                                $month=$difference->m;
+                                $day=$difference->d;
+                                $hours=$difference->h;
+                                $min=$difference->i;
+                
+                                $datetimeDifference='';
+                                if($years == 0 && $month == 0 && $day ==0 && $hours ==0 && $min > 0 ){
+                                    $datetimeDifference = $min." min";
+                                }
+                                elseif($years == 0 && $month == 0 && $day ==0 && $hours > 0 ){
+                                    $datetimeDifference = $hours.':'.$min." hrs";
+                                }
+                                elseif($years == 0 && $month == 0 && $day > 0 ){
+                                    $datetimeDifference = $day.' days '.$hours.' hrs';
+                                }
+                                elseif($years == 0 && $month > 0 ){
+                                    $datetimeDifference = $month.' months '.$day.' day';
+                                }
+                                elseif($years > 0 ){
+                                    $datetimeDifference = $years.' year '.$month.' months';
+                                }
+                                else{
+                                    $datetimeDifference = 'Now';
+                                }
+
 
                                 $img = "";
 
@@ -764,7 +796,7 @@ if (isset($_SESSION['id'])) {
                                     $img = '../images/ipad.png';
                                 }
                             
-                                $url=$googlemapAPI.$lat.','.$lon;
+                                $url=$googlemapAPI.$newlat.','.$newlon;
                                 $ch = curl_init();
                                 curl_setopt($ch, CURLOPT_URL, $url);
                                 curl_setopt($ch, CURLOPT_POST, false); 
@@ -772,13 +804,14 @@ if (isset($_SESSION['id'])) {
                                 $result = curl_exec($ch);
                                 $decode = json_decode($result);
                                 $deviceaddress=$decode->results[0]->formatted_address;
+    
 
                         ?>
                             <div class="devicebox">
                                 <div class="heading_box">
                                     <div class="headding_content">
                                         <div class="device_name_heading"><?php echo $dname ?></div>
-                                        <div class="device_address">Last seen : 24/04/21 24:55</div>
+                                        <div class="device_address">Last seen : <?php echo($datetimeDifference)?></div>
                                     </div>
                                     <div class="device_image_box"><img src="<?php echo $img ?>" alt=""></div>
                                 </div>

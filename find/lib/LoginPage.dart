@@ -45,6 +45,7 @@ class _LoginPageState extends State<LoginPage> {
 
     print("Parcing imei request");
 
+
     var data = jsonDecode(response.body);
 
     if (data['value']=='done'){
@@ -68,7 +69,8 @@ class _LoginPageState extends State<LoginPage> {
       print('save datas and redirect to bluetooth activation');
     }
     else{
-      print('some error occured !');
+      print('some error occured ! this is the response ');
+      print(response.body);
     }
   }
 
@@ -82,13 +84,14 @@ class _LoginPageState extends State<LoginPage> {
     );
     print("parcing results");
 
+
     var data = jsonDecode(response.body);
 
     if (data['value']=='valid'){
       print('login valid');
-      logid=data['login_id'];
+      LOGINID=data['login_id'];
       EMAIL=email;
-      registerImei(imei,devicename,logid);
+      registerImei(imei,devicename,LOGINID);
     }
     else{
       print('invalid username or password');

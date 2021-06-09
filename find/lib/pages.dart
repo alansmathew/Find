@@ -1,5 +1,4 @@
 import 'package:find/LoginPage.dart';
-import 'package:find/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -10,6 +9,7 @@ import 'dart:convert';
 import 'globals.dart';
 
 
+
 // first page
 class Firstpage extends StatefulWidget {
   @override
@@ -18,18 +18,95 @@ class Firstpage extends StatefulWidget {
 class _FirstpageState extends State<Firstpage> {
 
   Completer<GoogleMapController> _controller = Completer();
-  static LatLng _center = const LatLng(45.521563, -122.677433);
+  static LatLng _center = LatLng(9.520925, 76.728531);
   final Set<Marker> _markers = {};
   LatLng _lastMapPosition = _center;
+  var _devicename,_deviceaddress;
   MapType _currentMapType = MapType.normal;
+
+  @override
+  void initState() {
+    _getDeviceLocations();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  Future _getDeviceLocations() async{
+    SharedPreferences user = await SharedPreferences.getInstance();
+    var loginid=user.getString('loginid');
+    final response = await http.post(apiUrl,
+        body:{
+          'type':'listdevice',
+          'loginId':loginid,
+        });
+
+    print("Parcing response request");
+    // print(response.body);
+    var data = jsonDecode(response.body);
+    print(data);
+    if(data['value'] == 'devices'){
+
+      allDevices = data['devices']; // saving list off all device data to global variable
+      print('saved all details abt devices to global variable');
+      DeviceAddressList.clear();
+
+      //checking if current device is logout out or not
+      var isDeviceIdPresent = false ;
+      SharedPreferences user = await SharedPreferences.getInstance();
+      var deviceIdFromShPreffernece = user.getString("device_id");
+
+      List<dynamic> devices = data['devices'];
+      for(var i = 0; i < devices.length ; i++){
+        _devicename = devices[i]['name'];
+        var _lat = devices[i]['lat'];
+        var _lon = devices[i]['lon'];
+        var _time = devices[i]['time'];
+        _lastMapPosition = LatLng(double.parse(_lat),double.parse( _lon));
+        print(_lastMapPosition);
+
+        var _apiurltemp = "https://maps.googleapis.com/maps/api/geocode/json?&key=AIzaSyDcGOfvXmG8VTv8qvjQ3-diHeOLh0HyDY8&latlng="+_lat+","+_lon;
+        var _apiurl = Uri.parse(_apiurltemp);
+
+        final googleresponse = await http.get(_apiurl);
+        var googledata = jsonDecode(googleresponse.body);
+        if (_time == 'Now'){
+          _deviceaddress = "Last seen at - "+googledata['results'][0]['formatted_address']+" - " +_time ;
+        }
+        else{
+          _deviceaddress = "Last seen at - "+googledata['results'][0]['formatted_address']+" - ${_time} ago." ;
+        }
+        DeviceAddressList.add(_deviceaddress);
+
+        if(devices[i]['deviceID'] == deviceIdFromShPreffernece){
+          isDeviceIdPresent = true;
+        }
+
+        setState(() {
+          _center = _lastMapPosition;
+        });
+        _onAddMarkerButtonPressed();
+
+      }
+      if (isDeviceIdPresent == false){
+        print('loging out user !!');
+        WHILEVARIABLE = false ;
+        user.clear();
+        Get.to(LoginPage());
+      }
+    }
+    else{
+      print('user might have removed this device ! ');
+      Get.to(LoginPage());
+    }
+  }
 
   _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
   }
 
-  _onCameraMove(CameraPosition position) {
-    _lastMapPosition = position.target;
-  }
+  // _onCameraMove(CameraPosition position) {
+  //   _lastMapPosition = position.target;
+  // }
 
   _onMapTypeButtonPressed() {
     setState(() {
@@ -40,13 +117,14 @@ class _FirstpageState extends State<Firstpage> {
   }
 
   _onAddMarkerButtonPressed() {
+    // print(_lastMapPosition);
     setState(() {
       _markers.add(Marker(
         markerId: MarkerId(_lastMapPosition.toString()),
         position: _lastMapPosition,
         infoWindow: InfoWindow(
-          title: 'This is the title',
-          snippet: "this is the snippent",
+          title: _devicename,
+          snippet: _deviceaddress,
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
@@ -77,7 +155,7 @@ class _FirstpageState extends State<Firstpage> {
             ),
             mapType: _currentMapType,
             markers: _markers,
-            onCameraMove: _onCameraMove,
+            // onCameraMove: _onCameraMove,
           ),
           Padding(
             padding: EdgeInsets.only(right: 16.0, top: 60.0),
@@ -101,6 +179,8 @@ class _FirstpageState extends State<Firstpage> {
   }
 }
 
+
+
 //second page
 class Secondpage extends StatefulWidget {
   @override
@@ -118,12 +198,38 @@ class _SecondpageState extends State<Secondpage> {
           backgroundColor: Colors.teal,
         ),
         body: SafeArea(
-          child: Center(
-            child: Text("Second page"),
-          ),
+          child: buildlistview(context),
         ));
   }
+
+  ListView buildlistview(BuildContext context){
+    return ListView.builder(
+      itemCount: allDevices.length,
+        itemBuilder: (_, index){
+
+          var color=Colors.green;
+        if(allDevices[index]['state'] != 'active'){
+          color = Colors.red;
+        }
+            return Card(
+              child: ListTile(
+                title: Text(allDevices[index]['name']),
+                leading: Icon(Icons.devices),
+                subtitle: Text(DeviceAddressList[index]+"\n"+"Status : "+allDevices[index]['state']),
+                trailing:
+                  Icon(Icons.wifi_tethering,color: color,)
+              ),
+              margin: EdgeInsets.only(left: 14.0,right: 14.0, top: 15.0),
+              elevation: 10.0,
+            );
+        },
+    );
+  }
 }
+
+
+
+
 
 //third page
 class Thirdpage extends StatefulWidget {
@@ -139,7 +245,7 @@ class _ThirdpageState extends State<Thirdpage> {
     super.initState();
   }
 
-  var _email = "";
+  var _email = EMAIL;
   var _username ='';
   var _image = "https://alansmathew.000webhostapp.com/images/user.png";
 
@@ -159,7 +265,7 @@ class _ThirdpageState extends State<Thirdpage> {
       setState(() {
         _username=data['name'];
         _image= "https://alansmathew.000webhostapp.com/images/${data['image']}";
-        _email = user.getString('email');
+        // _email = user.getString('email');
       });
     }
     else{
@@ -170,6 +276,8 @@ class _ThirdpageState extends State<Thirdpage> {
 
   Future logoutFunction() async {
     print("loggout presssed");
+
+    WHILEVARIABLE = false ;
 
     SharedPreferences user = await SharedPreferences.getInstance();
     var deviceid = user.getString('device_id');

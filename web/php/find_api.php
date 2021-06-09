@@ -1,9 +1,9 @@
 <?php
 $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
 
-// $type=$_POST["type"];
+$type=$_POST["type"];
 $data=new \stdClass();
-$type='registerdevice';
+// $type='registerdevice';
 
 // ---------------- check vaild login ? ---------------------
 
@@ -87,7 +87,7 @@ if($type=='updateIMEI'){
     $sql="select * from tbl_device where imei =$imei and login_id=$login_id";
     $res=mysqli_query($con,$sql);
     // echo  mysqli_num_rows($res);
-    $time=date("h:i:s");
+    $time=date("h:i:s y-m-d");
     if(mysqli_num_rows($res)==0){
         $sql="insert into tbl_device (login_id,name,type,imei,state,time,lat,lon) values($login_id,'$name','mobile','$imei','active','$time','0','0')";
         if(mysqli_query($con,$sql)){
@@ -110,7 +110,7 @@ if($type=='updateloc'){
     $imei=$_POST['imei'];
     $lon=$_POST['lon'];
     $lat=$_POST['lat'];
-    $time=date("h:i:s");
+    $time=date("h:i:s y-m-d");
     // $data->value="lost";
     $sql="update tbl_device set lon='$lon',lat='$lat',time='$time' where imei='$imei' and login_id=$login_id";
     if(mysqli_query($con,$sql))

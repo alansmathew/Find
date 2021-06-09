@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'check_imei_model.dart';
 import 'globals.dart';
 
 

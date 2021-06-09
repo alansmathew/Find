@@ -111,9 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (data['value']=='valid'){
       print('Registration Sucessfull');
-      logid=data['login_id'];
+      LOGINID = data['login_id'];
       EMAIL=regName;
-      registerImei(imei,devicename,logid);
+      registerImei(imei,devicename,LOGINID);
     }
     else{
       print('registraction Failed.');

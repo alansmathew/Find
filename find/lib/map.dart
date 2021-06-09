@@ -1,5 +1,8 @@
+import 'package:find/globals.dart';
 import 'package:find/pages.dart';
+import 'package:find/update_locAnd_Sound.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(Mapv());
@@ -14,6 +17,22 @@ class _MapvState extends State<Mapv> {
 
   int _currentIndex = 0;
   final tabs =[Firstpage(),Secondpage(),Thirdpage()];
+
+  @override
+  void initState() {
+    initicalize();
+    super.initState();
+  }
+
+  void initicalize() async{
+    print('initilizing imei after cold start !!!');
+    SharedPreferences user = await SharedPreferences.getInstance();
+    IMEI=user.getString("imei");
+    EMAIL=user.getString("email");
+    LOGINID=user.getString('loginid');
+
+    alwaysRun();
+  }
 
   @override
   Widget build(BuildContext context) {

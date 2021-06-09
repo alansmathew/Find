@@ -606,7 +606,7 @@ if (isset($_SESSION['id'])) {
                         } else {
                             // email_ajax=true;
                             document.getElementById("changestatusofdevice").innerHTML = 'Current status : Lost';
-                            document.getElementById(val).innerHTML = 'Mark as Avtive';
+                            document.getElementById(val).innerHTML = 'Mark as Active';
                             lod.style.cssText = "display:none";
                         }
                     }

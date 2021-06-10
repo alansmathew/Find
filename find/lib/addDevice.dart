@@ -1,3 +1,4 @@
+import 'package:find/activateoffline.dart';
 import 'package:find/map.dart';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +21,10 @@ class _addDeviceState extends State<addDevice> {
   void _goToMapView(){
     print('SKipped parring for now, going to mapview');
     Get.to(Mapv());
+  }
+  void goactivateoffline(){
+    print('going to activate offline device');
+    Get.to(activateoffline());
   }
 
   @override
@@ -65,9 +70,7 @@ class _addDeviceState extends State<addDevice> {
                                   ),
                                 )
                             ),
-                            onPressed: ()=>{
-                              print('activate Paring ....')
-                            },
+                            onPressed: goactivateoffline,
                           ),
                         ),
                         margin: const EdgeInsets.only(bottom: 15.0),

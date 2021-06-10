@@ -1,5 +1,9 @@
 // import 'package:audioplayers/audioplayers.dart';
-// import 'package:audio_service/audio_service.dart';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:flutter_exoplayer/audio_notification.dart';
+// import 'package:flutter_exoplayer/audioplayer.dart';
+
+
 
 import 'dart:convert';
 
@@ -14,6 +18,12 @@ import 'package:geolocator/geolocator.dart';
 
 void alwaysRun() async{
 
+      // AudioPlayer audioPlayer = AudioPlayer();
+      // audioPlayer.play('assets/bel.wav');
+
+  // AudioPlayer audioPlayer = AudioPlayer();
+  // print("trying to play music");
+  // int result = await audioPlayer.play('bel.wav',isLocal: true);
 
   while(WHILEVARIABLE) {
 

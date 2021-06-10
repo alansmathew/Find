@@ -1,9 +1,12 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to server");
 
-$type=$_POST["type"];
+// $type=$_POST["type"];
 $data=new \stdClass();
-// $type='registerdevice';
+$type='setListningmode';
 
 // ---------------- check vaild login ? ---------------------
 
@@ -296,6 +299,80 @@ if($type == "listdevice"){
     echo json_encode($data);
 }
 
-
 // http://localhost/find/web/php/find_api.php?loginid=11&imei=%2212345678901234567891233222222222222123123123123123123123123%22&devicename=%22testdevice%22&type=%22mobile%22&lat=%2212,0000%22&lon=%2213,000%22&status=%22active%22
+
+//-----------------bluetooth paring----------
+if($type == "Paringoffline"){
+    $hashcode=$_POST['hashcode'];
+    $offlineID=$_POST['offlineID'];
+    $lat=$_POST['lat'];
+    $lon=$_POST['lon'];
+    $datetime =date('h:i:s y-m-d');
+
+    $sql = "SELECT * FROM tbl_device WHERE state = 'paring'"; //have to set status to paring client
+    if($result=mysqli_query($con,$sql)){
+        if(mysqli_num_rows($result) > 0){
+            while ($row=mysqli_fetch_array($result)){
+                $paringtime = $row['paringtime'];
+                $lattitude = $row['lat'];
+                $longitude = $row['lon'];
+                $actualTime = new DateTime(date('h:i:s y-m-d'));
+                $difference = $actualTime->diff(new DateTime(date($row['paringtime'])));
+                // echo "latitude : ".$lattitude."\nlongitude : ".$longitude;
+                
+                    // echo "update user location";
+                    if ($difference->days == 0 && $difference->h == 0 && $difference->i < 3 && $lattitude - 0.01 < $lat && $lattitude + 0.01 > $lat && $longitude - 0.01 < $lon && $longitude + 0.01 > $lon){
+                        // echo "time correct lattitude correct";
+                        //     echo "updating db";
+                            $data->value = 'true';
+                            $data->device = $row['name'];
+                            $data->deviceID = $row['device_id'];
+
+                        // else{
+                        //     $data->value = 'false';
+                        //     $data->device = $row['name'];
+                        //     $data->deviceID = $row['device_id'];
+                        // }
+                     
+                    }
+                else{
+                    // echo "no device";
+                    // echo date('h:i:s y-m-d');
+                    // echo "lon: ".$lattitude;
+                    // echo "\lat: ".$longitude;
+                    $data->value = 'false';
+                    $data->device = '';
+                    $data->deviceID = '';
+                }
+            }
+        
+        }
+        else{
+            // echo "no paring device found";
+            $data->value = 'false';
+            $data->device = '';
+            $data->deviceID = '';
+        }
+    }
+    else{
+        echo ('query error');
+    }
+    echo json_encode($data);
+    
+}
+
+// ------------- set listning mode --------- 
+if($type == "setListningmode"){
+    $deviceID=$_POST['deviceID'];
+    $datetime =date('h:i:s y-m-d');
+    $sql = "update tbl_device set state='paring', paringtime='$datetime' WHERE device_id = $deviceID"; //have to set status to paring client
+    if(mysqli_query($con,$sql)){
+        $data->value = 'true';
+    }
+    else{
+        $data->value = 'false';
+    }
+    echo json_encode($data);
+}
+
 ?>

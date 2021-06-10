@@ -29,7 +29,12 @@ dependencies:
   shared_preferences: ^2.0.6
   get: ^4.1.4
   device_info: ^2.0.2
-  #  flutter_blue: ^0.8.0
+  flutter_blue: ^0.8.0
+#  flutter_exoplayer: ^0.6.1
+#  audioplayers: 0.18.0
+#  audioplayer: 0.8.1
+
+
 
 
 

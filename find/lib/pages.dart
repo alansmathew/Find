@@ -1,5 +1,8 @@
 import 'package:find/LoginPage.dart';
+import 'package:find/activateAnotherDevice.dart';
+import 'package:find/activateoffline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'dart:async';
@@ -187,12 +190,15 @@ class Secondpage extends StatefulWidget {
   _SecondpageState createState() => _SecondpageState();
 }
 class _SecondpageState extends State<Secondpage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "List of devices",
+              'List of devices' ,
+            // "List of devices",
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Colors.teal,
@@ -304,6 +310,16 @@ class _ThirdpageState extends State<Thirdpage> {
     }
   }
 
+  gotActivateoffline(){
+    print('activate offline pressed ');
+    Get.to(activateoffline());
+  }
+
+  gotoActivateanotherdevice(){
+    print('Activate another device button pressed ');
+    Get.to(activateAnotherDevice());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -346,6 +362,42 @@ class _ThirdpageState extends State<Thirdpage> {
                       fontSize: 20.0,
                       color: Colors.teal.shade900,
                       fontFamily: 'Source Sans Pro'),
+                ),
+              )),
+          Card(
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: ListTile(
+                onTap: gotActivateoffline,
+                leading: Icon(
+                  Icons.wifi_tethering_sharp,
+                  color: Colors.green,
+                ),
+                title: Text(
+                  'Activate Offline finding',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.teal.shade900,
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 20.0,
+                  ),
+                ),
+              )),
+          Card(
+              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+              child: ListTile(
+                onTap: gotoActivateanotherdevice,
+                leading: Icon(
+                  Icons.wifi_tethering_sharp,
+                  color: Colors.blue,
+                ),
+                title: Text(
+                  'Activate another device',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Colors.teal.shade900,
+                    fontFamily: 'Source Sans Pro',
+                    fontSize: 20.0,
+                  ),
                 ),
               )),
           Card(

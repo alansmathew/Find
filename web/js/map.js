@@ -75,9 +75,16 @@ var scale = new mapboxgl.ScaleControl({
   maxWidth: 80,
   unit: "imperial",
 });
-map.addControl(scale, "top-right");
+
+var directions = new MapboxDirections({
+  accessToken: mapboxgl.accessToken
+})
+
+map.addControl(directions, "top-right")
+map.addControl(locator, "bottom-right");
+map.addControl(scale, "bottom-right");
 scale.setUnit("metric");
 const nav = new mapboxgl.NavigationControl();
-map.addControl(nav, "top-right");
-map.addControl(locator, "top-right");
+map.addControl(nav, "bottom-right");
+
 

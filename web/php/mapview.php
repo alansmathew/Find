@@ -221,7 +221,7 @@ if (isset($_SESSION['id'])) {
             }
 
             .frm input,
-            button {
+            .modal button {
                 font-size: 16px;
                 width: 99%;
                 height: 45px;
@@ -283,123 +283,122 @@ if (isset($_SESSION['id'])) {
                 flex-wrap: wrap;
                 justify-content:center;
             }
-/* new one */
+            /* new one */
             .devicebox{
-            position: relative;
-            width:250px;
-            height:300px;
-            margin:20px;
-            /* background-color: aliceblue; */
-            background-color: rgb(245, 245, 245);
-            border-radius: 10px;
-            box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
+                position: relative;
+                width:250px;
+                height:300px;
+                margin:20px;
+                /* background-color: aliceblue; */
+                background-color: rgb(245, 245, 245);
+                border-radius: 10px;
+                box-shadow: 10px 10px 10px 1px #0d275017, -10px -10px 10px 1px white;
+            }
+            .heading_box{
+                position: relative;
+                width:220px;
+                height:60px;
+                margin: 15px;
+                /* background-color: antiquewhite; */
+            }
+            .headding_content{
+                float: left;
+                width:170px;
+                height:100%;
+                /* background: beige; */
+            }
 
-        }
-        .heading_box{
-            position: relative;
-            width:220px;
-            height:60px;
-            margin: 15px;
-            /* background-color: antiquewhite; */
-        }
-        .headding_content{
-            float: left;
-            width:170px;
-            height:100%;
-            /* background: beige; */
-        }
+            .device_image_box{
+                float: right;
+                width:50px;
+                height: 100%;
+                /* background: blueviolet; */
+            }
+            .device_image_box img{
+                width: 100%;
+                height:75%;
+                object-fit: contain;
+            }
+            .device_name_heading{
+                width: 100%;
+                height:24px;
+                /* background: brown; */
+                font-size: 20px;
+                font-family: sans-serif;
+            }
+            .device_address{
+                padding-top: 5px;
+                width:100%;
+                height: 76px;
+                font-size: 12px;
+                color:rgb(70, 70, 70);
+                font-family: sans-serif;
+            }
+            .devicebox .remove_button{
+                position: absolute;
+                bottom: 10px;
+                width:100%;
+                height: 30px;
+                color: red;
+                font-size: 17px;
+                font-family: sans-serif;
+                border:none;
+                background-color: inherit;
+                cursor: pointer;
+                transition: ease-in-out .1s all;
+            }
+            .remove_button:hover{
+                font-size: 17.5px;
+            }
+            .device_state_box{
+                position: relative;
+                width:220px;
+                height:140px;
+                margin: 15px;
+                background-color: rgba(230, 230, 250, 0.427);
+                border-radius: 10px;
+            }
+            .device_state_box .device_lost_class{
+                position: absolute;
+                width: 100%;
+                font-size: 13px;
+                font-family: sans-serif;
+                border:none;
+                padding-top: 7px;
+                bottom:10px;
+                height: 20px;
+                color:blue;
+                cursor: pointer;
+                background-color: rgba(230, 230, 250, 0);
+                transition: all ease-in-out .1s;
+            }
+            .device_lost_class:hover{
+                font-size: 13.6px;
+            }
+            .device_state_box .heading_of_device_state{
+                width: 100%;
+                font-family: sans-serif;
+                font-size: 14.5px;
+                text-align: center;
+                padding-top:10px;
+                padding-bottom: 5px;
+                border-bottom:1px dotted rgba(82, 82, 82, 0.125);
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                /* background-color: khaki; */
+            }
+            .actual_adress_box{
+                /* background-color: khaki; */
+                font-size: 13px;
+                font-family: sans-serif;
+                color:rgba(53, 53, 53, 0.872);
+                margin: 7px;
+                height: 65px;
+                overflow: scroll;
+            }
 
-        .device_image_box{
-            float: right;
-            width:50px;
-            height: 100%;
-            /* background: blueviolet; */
-        }
-        .device_image_box img{
-            width: 100%;
-            height:75%;
-            object-fit: contain;
-        }
-        .device_name_heading{
-            width: 100%;
-            height:24px;
-            /* background: brown; */
-            font-size: 20px;
-            font-family: sans-serif;
-        }
-        .device_address{
-            padding-top: 5px;
-            width:100%;
-            height: 76px;
-            font-size: 12px;
-            color:rgb(70, 70, 70);
-            font-family: sans-serif;
-        }
-        .devicebox .remove_button{
-            position: absolute;
-            bottom: 10px;
-            width:100%;
-            height: 30px;
-            color: red;
-            font-size: 17px;
-            font-family: sans-serif;
-            border:none;
-            background-color: inherit;
-            cursor: pointer;
-            transition: ease-in-out .1s all;
-        }
-        .remove_button:hover{
-            font-size: 17.5px;
-        }
-        .device_state_box{
-            position: relative;
-            width:220px;
-            height:140px;
-            margin: 15px;
-            background-color: rgba(230, 230, 250, 0.427);
-            border-radius: 10px;
-        }
-        .device_state_box .device_lost_class{
-            position: absolute;
-            width: 100%;
-            font-size: 13px;
-            font-family: sans-serif;
-            border:none;
-            padding-top: 7px;
-            bottom:10px;
-            height: 20px;
-            color:blue;
-            cursor: pointer;
-            background-color: rgba(230, 230, 250, 0);
-            transition: all ease-in-out .1s;
-        }
-        .device_lost_class:hover{
-            font-size: 13.6px;
-        }
-        .device_state_box .heading_of_device_state{
-            width: 100%;
-            font-family: sans-serif;
-            font-size: 14.5px;
-            text-align: center;
-            padding-top:10px;
-            padding-bottom: 5px;
-            border-bottom:1px dotted rgba(82, 82, 82, 0.125);
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            /* background-color: khaki; */
-        }
-        .actual_adress_box{
-            /* background-color: khaki; */
-            font-size: 13px;
-            font-family: sans-serif;
-            color:rgba(53, 53, 53, 0.872);
-            margin: 7px;
-            height: 65px;
-            overflow: scroll;
-        }
-
-  /* till herer  */
+            /* till herer  */
 
             .bottomcontainer {
                 position: relative;
@@ -486,6 +485,12 @@ if (isset($_SESSION['id'])) {
 
         <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
         <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+        <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+            type="text/css"
+        />
         <script src='../js/map.js' defer></script>
 
         <script>

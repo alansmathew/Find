@@ -113,6 +113,8 @@ if($type=='updateloc'){
     $imei=$_POST['imei'];
     $lon=$_POST['lon'];
     $lat=$_POST['lat'];
+    $hash = $_POST['hashcode'];
+    $offid = $_POST['offlineID'];
     $time=date("h:i:s y-m-d");
     // $data->value="lost";
     $sql="update tbl_device set lon='$lon',lat='$lat',time='$time' where imei='$imei' and login_id=$login_id";
@@ -121,11 +123,30 @@ if($type=='updateloc'){
         $sql="select state from tbl_device where imei='$imei' and login_id=$login_id";
         if($resilt=mysqli_query($con,$sql)){
             $row=mysqli_fetch_array($resilt);
+            
+            $sqlofflinedevice = "select * from tbl_device where hashcode='$hash' or oflineid='$offid'";
+            $resiltlistofdevices=mysqli_query($con,$sqlofflinedevice);
+            if(mysqli_num_rows($resiltlistofdevices) == 1){
+                
+                $rowdevices=mysqli_fetch_array($resiltlistofdevices);
+                
+                $deviceeeId = $rowdevices['device_id'];
+                $sqlupdateoter="update tbl_device set lon='$lon',lat='$lat',time='$time' where device_id =$deviceeeId";
+                if(mysqli_query($con,$sqlupdateoter)){
+                    $data->device="one device found and updated -- ".$rowdevices['name'];
+                }
+                else{
+                    $data->device="one device found updatein error ".$rowdevices['name'];
+                }
+                
+                // $data->device="one device found ".$rowdevices['name'];
+            }
             $data->value=$row['state'];
         }
     }
     else{
         $data->value="error";
+        $data->device="";
     }
     echo json_encode($data);
 }

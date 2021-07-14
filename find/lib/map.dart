@@ -31,7 +31,7 @@ class _MapvState extends State<Mapv> {
     EMAIL=user.getString("email");
     LOGINID=user.getString('loginid');
 
-    // alwaysRun();
+    alwaysRun();
   }
 
   @override

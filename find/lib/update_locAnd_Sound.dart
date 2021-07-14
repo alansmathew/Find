@@ -3,11 +3,10 @@
 // import 'package:flutter_exoplayer/audio_notification.dart';
 // import 'package:flutter_exoplayer/audioplayer.dart';
 
-
-
 import 'dart:convert';
 
 import 'package:find/LoginPage.dart';
+import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,14 +17,35 @@ import 'package:geolocator/geolocator.dart';
 
 void alwaysRun() async{
 
-      // AudioPlayer audioPlayer = AudioPlayer();
-      // audioPlayer.play('assets/bel.wav');
+  // AudioPlayer audioPlayer = AudioPlayer();
+  // audioPlayer.play('assets/bel.wav');
 
   // AudioPlayer audioPlayer = AudioPlayer();
   // print("trying to play music");
   // int result = await audioPlayer.play('bel.wav',isLocal: true);
 
   while(WHILEVARIABLE) {
+
+    var current_rssid = -100 ;
+    var bluethoothId ;
+    var hashname = '' ;
+
+    print('getting bluetooth devices');
+    FlutterBlue flutterBlue = FlutterBlue.instance;
+    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    flutterBlue.scanResults.listen((results) async {
+      for (ScanResult r in results) {
+          if (r.rssi > current_rssid ){
+            print(r.rssi);
+            current_rssid = r.rssi ;
+            bluethoothId = r.device.id ;
+            hashname = r.device.name ;
+          }
+      }
+    });
+    // Stop scanning
+    flutterBlue.stopScan();
+
 
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     lat=position.latitude;
@@ -39,9 +59,12 @@ void alwaysRun() async{
           'login_id':LOGINID,
           'lon':lon.toString(),
           'lat':lat.toString(),
+          'hashcode':hashname.toString(),
+          'offlineID':bluethoothId.toString(),
         });
 
     print("data sent");
+    print(responsee.body);
     var responseedata = jsonDecode(responsee.body);
     print(responseedata['value']);
     final String alert=responseedata['value'];
@@ -62,6 +85,9 @@ void alwaysRun() async{
     else {
       print('Updating Device Location');
     }
-    await new Future.delayed(const Duration(seconds : 10));
+
+    // WHILEVARIABLE = false ;
+    await new Future.delayed(const Duration(seconds : 30));
+
   }
 }

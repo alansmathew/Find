@@ -51,8 +51,6 @@ class _activateAnotherDeviceState extends State<activateAnotherDevice> {
   }
 
   Future sentOfflinedata() async{
-    print("hashname="+hashname);
-    print("bluethothid"+bluethoothId.toString());
     final responseBluetoothParing = await http.post(apiUrl,
         body:{
           'type':'Paringoffline',

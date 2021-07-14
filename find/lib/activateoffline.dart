@@ -31,7 +31,6 @@ class _activateofflineState extends State<activateoffline> {
     print("Parcing imei request");
     print(response.body);
     // var data = jsonDecode(response.body);
-
   }
 
   @override

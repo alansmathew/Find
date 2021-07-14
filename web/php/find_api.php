@@ -6,7 +6,7 @@ $con=mysqli_connect("localhost","root","","find")or die("Couldn't connect to ser
 
 // $type=$_POST["type"];
 $data=new \stdClass();
-$type='setListningmode';
+$type='Paringoffline';
 
 // ---------------- check vaild login ? ---------------------
 
@@ -303,11 +303,16 @@ if($type == "listdevice"){
 
 //-----------------bluetooth paring----------
 if($type == "Paringoffline"){
-    $hashcode=$_POST['hashcode'];
-    $offlineID=$_POST['offlineID'];
-    $lat=$_POST['lat'];
-    $lon=$_POST['lon'];
+    
+    // $hashcode=$_POST['hashcode'];
+    // $offlineID=$_POST['offlineID'];
+    // $lat=$_POST['lat'];
+    // $lon=$_POST['lon'];
     $datetime =date('h:i:s y-m-d');
+    $hashcode="";
+    $offlineID="jasdkahskjhhhh76817239127398";
+    $lat=9.53092978193696;
+    $lon=76.73130051859147;
 
     $sql = "SELECT * FROM tbl_device WHERE state = 'paring'"; //have to set status to paring client
     if($result=mysqli_query($con,$sql)){
@@ -321,12 +326,20 @@ if($type == "Paringoffline"){
                 // echo "latitude : ".$lattitude."\nlongitude : ".$longitude;
                 
                     // echo "update user location";
-                    if ($difference->days == 0 && $difference->h == 0 && $difference->i < 3 && $lattitude - 0.01 < $lat && $lattitude + 0.01 > $lat && $longitude - 0.01 < $lon && $longitude + 0.01 > $lon){
+                    if ($difference->days == 0 && $difference->h == 0 && $difference->i < 30 && $lattitude - 0.04 < $lat && $lattitude + 0.04 > $lat && $longitude - 0.04 < $lon && $longitude + 0.04 > $lon){
+                        
+                        $devicee_id=$row['device_id'];
+                        $sqlofflinedevice="update tbl_device set lon='$lon',lat='$lat',time='$datetime',state='active',hashcode='$hashcode',oflineid='$offlineID' where device_id='$devicee_id'";
+                        if(mysqli_query($con,$sqlofflinedevice)){
+                            echo "time correct lattitude correct";
+                            echo "updating db";
+                        }
                         // echo "time correct lattitude correct";
-                        //     echo "updating db";
-                            $data->value = 'true';
-                            $data->device = $row['name'];
-                            $data->deviceID = $row['device_id'];
+                        // echo "updating db";
+
+                            // $data->value = 'true';
+                            // $data->device = $row['name'];
+                            // $data->deviceID = $row['device_id'];
 
                         // else{
                         //     $data->value = 'false';
@@ -336,13 +349,13 @@ if($type == "Paringoffline"){
                      
                     }
                 else{
-                    // echo "no device";
-                    // echo date('h:i:s y-m-d');
-                    // echo "lon: ".$lattitude;
-                    // echo "\lat: ".$longitude;
-                    $data->value = 'false';
-                    $data->device = '';
-                    $data->deviceID = '';
+                    echo "no device<br>";
+                    echo date('h:i:s y-m-d');
+                    echo "lon: ".$lattitude;
+                    echo "\lat: ".$longitude;
+                    // $data->value = 'false';
+                    // $data->device = '';
+                    // $data->deviceID = '';
                 }
             }
         

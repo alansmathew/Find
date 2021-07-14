@@ -36,7 +36,9 @@ class _MapvState extends State<Mapv> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return new WillPopScope(
+        onWillPop: () async => false,
+    child:Scaffold(
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -64,7 +66,7 @@ class _MapvState extends State<Mapv> {
           });
         },
       ),
-    );
+    ));
   }
 
 }

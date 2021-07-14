@@ -21,7 +21,7 @@ class _activateAnotherDeviceState extends State<activateAnotherDevice> {
   var current_rssid = -100 ;
   var bluethoothId ;
   var hashname = '' ;
-  var Textdata = 'Activating another device';
+  var Textdata = 'Activating another device\n';
 
   getbluetoothdevices()  {
 
@@ -50,11 +50,13 @@ class _activateAnotherDeviceState extends State<activateAnotherDevice> {
   }
 
   Future sentOfflinedata() async{
+    print("hashname="+hashname);
+    print("bluethothid"+bluethoothId.toString());
     final responseBluetoothParing = await http.post(apiUrl,
         body:{
           'type':'Paringoffline',
-          'hashcode':bluethoothId.toString(),
-          'offlineID':hashname,
+          'hashcode':hashname,
+          'offlineID':bluethoothId.toString(),
           'lat':lat.toString(),
           'lon':lon.toString(),
         });
@@ -91,7 +93,7 @@ class _activateAnotherDeviceState extends State<activateAnotherDevice> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text( Textdata,
+        child: Text( Textdata,textAlign: TextAlign.center,
         ),
       ),
     );
